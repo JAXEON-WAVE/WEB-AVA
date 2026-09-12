@@ -1,0 +1,248 @@
+<!-- 
+   Integrantes: Juan Diego Romero, Santiago Barrera y Andres Carvajal
+
+   Las funciones que actualmente usamos en nuestra pagina:
+        Botones en el header que desplazan a las respectivas secciones de la pagina. 
+        Botones en el footer que redireccionan a las redes sociales de la empresa.
+        Uso de tabla simple con nombres de las plataformas en las que esta disponible el juego. Seccion de plataformas.
+        Referencias de imagenes, gifs y videos con sus respectivos atributos alt. Seccion de hero, mecanicas, conoce mas, noticias y footer.
+        Formulario de ayuda que envia la informacion del usuario y su problema. Seccion centro de ayuda
+        Verificacion de los campos del formulario de ayuda para que el usuario no pueda enviar el formulario sin llenar los campos requeridos. Seccion centro de ayuda
+        Verificacion de que el correo del usuario sea valido. Seccion centro de ayuda
+-->
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Videojuego</title>
+        <link rel="stylesheet" href="Estilos.css">
+    </head>
+
+    <body>
+        <header class="header-principal">
+            <section class="logo-container">
+                <img src="Logo.png" alt="Imagen del logo">
+            </section>
+
+            <nav class="nav-principal">
+                <a href="#inicio" class="btn-nav">Inicio</a>
+                <a href="#Plataformas" class="btn-nav">Plataformas</a>
+                <a href="#multimedia" class="btn-nav">Multimedia</a>
+                <a href="#conoce" class="btn-nav">Conoce</a>
+                <a href="#noticias" class="btn-nav">Noticias</a>
+                <a href="#ayuda" class="btn-nav">Ayuda</a>
+            </nav>
+
+            <a href="#" class="btn-login" onclick="document.getElementById('form').style.display='block'">
+                Iniciar sesión
+            </a>
+        </header>
+
+        <main>
+            <section id="inicio" class="hero-section">
+                <video autoplay loop muted playsinline class="hero-video">
+                    <source src="Cinematica.mp4" type="video/mp4">
+                    Tu navegador no soporta videos en HTML5.
+                </video>
+
+                <h1 class="hero-titulo">
+                    Nombre del videojuego
+                </h1>
+
+                <p class="hero-descripcion">
+                    Descripción breve del videojuego
+                </p>
+
+                <nav class="hero-nav">
+                    <a href="#Plataformas" class="btn-hero">Conoce el juego</a>
+                    <a href="#multimedia" class="btn-hero">Ver trailer</a>
+                </nav>
+            </section>
+
+            <section id="Plataformas" class="seccion-plataformas">
+                <h2 class="titulo-seccion amplio">
+                    Plataformas disponibles
+                </h2>
+
+                <div class="contenedor-flex-centro">
+                    <article class="caja-qr">
+                        <p class="texto-qr">QR</p>
+                    </article>
+
+                    <nav class="nav-tabla">
+                        <table class="tabla-plataformas">
+                            <thead>
+                                <tr>
+                                    <td><a href="#" class="btn-plataforma">PC</a></td>
+                                    <td><a href="#" class="btn-plataforma">PlayStation</a></td>
+                                    <td><a href="#" class="btn-plataforma">Xbox</a></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><a href="#" class="btn-plataforma">Android</a></td>
+                                    <td><a href="#" class="btn-plataforma">iOS</a></td>
+                                    <td><a href="#" class="btn-plataforma">Nintendo Switch</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </nav>
+
+                    <aside class="caja-clasificacion">
+                        <p class="texto-clasificacion">
+                            Sección de clasificación de edades
+                        </p>
+                    </aside>
+                </div>
+            </section>
+
+            <section id="multimedia" class="seccion-multimedia">
+                <h2 class="titulo-seccion amplio">
+                    Mecánicas básicas del juego
+                </h2>
+
+                <p class="descripcion-seccion">
+                    Descripción de las mecánicas
+                </p>
+
+                <div class="contenedor-flex-centro margen-top-50">
+                    <aside class="menu-mecanicas">
+                        <nav>
+                            <a href="#" class="btn-mecanica">Controles</a>
+                            <a href="#" class="btn-mecanica">Combate</a>
+                            <a href="#" class="btn-mecanica">Estrategia</a>
+                            <a href="#" class="btn-mecanica">Progresión</a>
+                        </nav>
+                    </aside>
+
+                    <article class="video-mecanicas-container">
+                        <video controls class="video-mecanicas">
+                            <source src="Mecanicas.mp4" type="video/mp4">
+                            Tu navegador no soporta el reproductor de video.
+                        </video>
+                    </article>
+                </div>
+            </section>
+
+            <section id="conoce" class="seccion-conoce">
+                <h2 class="titulo-seccion medio">
+                    Conoce más
+                </h2>
+
+                <div class="contenedor-flex-centro margen-top-40">
+                    <article class="tarjeta-conoce">
+                        <div class="imagen-conoce-container">
+                            <img src="Conoce1.png" alt="Imagen de la wiki oficial." class="img-fit">
+                        </div>
+                        <a href="#" class="btn-conoce">Wiki oficial</a>
+                    </article>
+
+                    <article class="tarjeta-conoce">
+                        <div class="imagen-conoce-container">
+                            <img src="Conoce2.gif" alt="Imagen de guias y consejos." class="img-fit">
+                        </div>
+                        <a href="#" class="btn-conoce">Guías y consejos</a>
+                    </article>
+
+                    <article class="tarjeta-conoce">
+                        <div class="imagen-conoce-container">
+                            <img src="Conoce3.png" alt="Imagen de otros proyectos." class="img-fit">
+                        </div>
+                        <a href="#" class="btn-conoce">Otros proyectos</a>
+                    </article>
+                </div>
+            </section>
+
+            <section id="noticias" class="seccion-noticias">
+                <h2 class="titulo-seccion medio">
+                    Noticias y actualizaciones
+                </h2>
+
+                <div class="carrusel-noticias">
+                    <button class="btn-flecha">◀</button>
+
+                    <article class="tarjeta-noticia grande">
+                        <img src="Noticia1.png" alt="Visualización de la noticia 1. Anuncio de seguridad" class="img-fit">
+                    </article>
+
+                    <article class="tarjeta-noticia grande">
+                        <img src="Noticia2.png" alt="Visualización de la noticia 2. Anuncio de actualización" class="img-fit">
+                    </article>
+
+                    <article class="tarjeta-noticia grande">
+                        <img src="Noticia3.png" alt="Visualización de la noticia 3. Anuncio de seguridad" class="img-fit">
+                    </article>
+
+                    <article class="tarjeta-noticia pequeña">
+                        <img src="Noticia4.png" alt="Visualización de la noticia 4. Previsualización de la noticia" class="img-fit">
+                    </article>
+
+                    <button class="btn-flecha">▶</button>
+                </div>
+                <a href="#" class="btn-todas-noticias">
+                    Ver todas las noticias
+                </a>
+            </section>
+
+            <section id="ayuda" class="seccion-ayuda">
+                <h2 class="titulo-seccion medio">
+                    Centro de ayuda
+                </h2>
+
+                <form id="form" class="formulario-ayuda">
+                    <label for="Nombre" class="form-label">Nombre del usuario:</label><br>
+                    <input type="text" id="Nombre" name="Nombre" required class="form-input"><br><br>
+
+                    <label for="Correo" class="form-label">Correo del usuario:</label><br>
+                    <input type="email" id="Correo" name="Correo" required class="form-input"><br><br>
+
+                    <label for="Problema" class="form-label">Tipo de problema:</label><br>
+                    <select id="Problema" name="Problema" class="form-select">
+                        <option value="Cuenta">Problema con la cuenta</option>
+                        <option value="Juego">Problema con el juego</option>
+                        <option value="Conexion">Problema de conexión</option>
+                        <option value="Otro">Otro</option>
+                    </select><br><br>
+
+                    <label for="Descripcion" class="form-label">Descripción del problema:</label><br>
+                    <textarea id="Descripcion" name="Descripcion" rows="5" class="form-input"></textarea><br><br>
+
+                    <button type="submit" class="btn-submit">Enviar</button>
+                </form>
+            </section>
+        </main>
+
+        <footer class="footer-principal">
+            <section class="footer-logo-container">
+                <img src="Logo.png" alt="Imagen del logo" class="footer-logo">
+            </section>
+
+            <nav class="nav-footer-links">
+                <a href="#" class="link-footer">Términos y políticas de privacidad</a>
+                <a href="#" class="link-footer">Sobre nosotros</a>
+                <a href="#" class="link-footer">Contáctanos</a>
+                <a href="#ayuda" class="link-footer">Ayuda</a>
+            </nav>
+
+            <nav class="nav-footer-redes">
+                <a href="https://www.facebook.com/ava/" class="link-red-social">
+                    <img src="Facebook.png" alt="Logo de Facebook" class="icon-facebook">
+                </a>
+                <a href="https://x.com/avaunei" class="link-red-social">
+                    <img src="X.png" alt="Logo de X (Twitter)" class="icon-x">
+                </a>
+                <a href="https://www.instagram.com/alliance_of_valiant_arms/" class="link-red-social">
+                    <img src="Instagram.png" alt="Logo de Instagram" class="icon-instagram">
+                </a>
+                <a href="https://www.youtube.com/@AVAkzArp" class="link-red-social">
+                    <img src="YouTube.png" alt="Logo de YouTube" class="icon-youtube">
+                </a>
+            </nav>
+
+            <p class="copyright">
+                &copy; AeriaGames. Alliance of Valiant Arms. Todos los derechos reservados.
+                Fanpage hecha por: Juan Diego romero, Santiago Barrera y Andres Carvajal
+            </p>
+        </footer>
+    </body>
+</html>
