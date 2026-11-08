@@ -9,6 +9,64 @@
         Formulario de ayuda que envia la informacion del usuario y su problema. Seccion centro de ayuda
         Verificacion de los campos del formulario de ayuda para que el usuario no pueda enviar el formulario sin llenar los campos requeridos. Seccion centro de ayuda
         Verificacion de que el correo del usuario sea valido. Seccion centro de ayuda
+
+   Para la decoracion de los styles usamos:
+   Cajas y sus dimensiones
+
+        width y height: Lo usamos para definir el ancho y la altura de un elemento.
+
+        margin(usamos top, left ,bottom, right): Las usamos para poner un espacio exterior alrededor de un elemento y separarlo de los demás.
+
+        padding(Solo usamos top): Lo usamos para definir el espacio interno entre el contenido de un elemento y su borde.
+
+        box-sizing: Lo usamos para controlar si el ancho y alto total de un elemento incluyen el relleno (padding) y sus bordes.
+
+    Estructura y posicionamiento
+
+        display: Lo usamos para ver cómo se muestra un elemento en la página y cómo se comporta respecto a los demás.
+
+        flex-direction: Lo usamos para establecer la dirección en la que organizamos los elementos dentro de un contenedor(en fila o columna).
+
+        justify-content: Lo usamos para alinear y distribuir los elementos horizontalmente a lo largo del eje principal.
+
+        align-items: Lo usamos para alinear los elementos verticalmente a lo largo del eje.
+
+        gap: Lo usamos para definir el espacio de separación entre los elementos dentro de un contenedor. Solo lo usamos en contenedores flex, para separar los elementos de las noticias y tambien para separar los elementos de la seccion de conoce mas.
+
+        position: Lo usamos para definir el tipo de posicionamiento de un elemento dentro del documento (estático, relativo, absoluto, fijo).
+
+        z-index: Lo usamos para poner un elemento delante o detrás de otro.
+
+        height: calc(): Lo usamos para calcular la altura de un elemento usando otros valores.
+
+        overflow: Lo usamos para controlar qué sucede con el contenido cuando excede las dimensiones de su contenedor. Fue util para que no sobresalieran las imagenes de en los elementos con bordes redondeados.
+
+    Colores y fondos
+
+        background / background-color: Lo usamos para establecer el color o la imagen de fondo de un elemento, para que fuera mas fiel al wiframe y si algo cambiarlo mas adelante
+
+        color: Lo usamos para definir el color del texto.
+
+    Bordes y esquinas
+
+        border: Lo usamos para definir el grosor y el color del borde alrededor de un elemento.
+
+        border-bottom: Lo usamos para aplicar un borde únicamente en la parte inferior de un elemento en nuestro caso solo para el header.
+
+        border-radius: Lo usamos para redondear las esquinas de los bordes de un elemento.
+
+    Tipografías y alineación
+
+        font-family: Lo usamos para seleccionar el tipo de letra o familia tipográfica del texto. Igual solo usamos la arial al final
+
+        font-size: Lo usamos para cambiar el tamaño de la fuente del texto.
+
+        text-align: Lo usamos para alinear horizontalmente el texto dentro de su contenedor (izquierda, centro, derecha).
+
+        text-decoration: Lo usamos para quitar el subrayado en los elementos del header y tambien de los iconos de redes sociales del footer.
+
+    Contenido Visual y Multimedia
+        object-fit: Lo usamos para ajustar las imagenes, gif y video para adaptarse a las dimensiones de su respectivo contenedor.
 -->
 <!DOCTYPE html>
 <html lang="es">
@@ -31,6 +89,7 @@
                 <a href="#conoce" class="btn-nav">Conoce</a>
                 <a href="#noticias" class="btn-nav">Noticias</a>
                 <a href="#ayuda" class="btn-nav">Ayuda</a>
+                <a href="/dashboard" class="btn-nav">Dashboard</a>
             </nav>
 
             <a href="#" class="btn-login" onclick="document.getElementById('form').style.display='block'">
@@ -179,6 +238,11 @@
 
                     <button class="btn-flecha">▶</button>
                 </div>
+
+                <div class="bar-slider">
+                    Slider
+                </div>
+
                 <a href="#" class="btn-todas-noticias">
                     Ver todas las noticias
                 </a>
@@ -189,7 +253,7 @@
                     Centro de ayuda
                 </h2>
 
-                <form id="form" class="formulario-ayuda">
+                <form id="form" class="formulario-ayuda" action="/registrar" method="post">
                     <label for="Nombre" class="form-label">Nombre del usuario:</label><br>
                     <input type="text" id="Nombre" name="Nombre" required class="form-input"><br><br>
 
