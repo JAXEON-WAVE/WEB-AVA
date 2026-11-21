@@ -10,14 +10,35 @@ html {
 body {
     margin: 0;
     font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
-    background-color: #0b0e11;
     color: #e2e8f0;
+
+    /* Color de los cuadros */
+    background-color: #111315;
+
+    /* Cuadrícula uniforme */
+    background-image:
+        linear-gradient(
+            to right,
+            transparent 98.5%,
+            #000000 98.5%
+        ),
+        linear-gradient(
+            to bottom,
+            transparent 98.5%,
+            #000000 98.5%
+        );
+
+    /* Tamaño de cada cuadro */
+    background-size: 70px 70px;
+
+    background-position: center top;
+    background-attachment: fixed;
 }
 
 .header-principal {
     min-height: 105px;
     padding: 10px 30px;
-    background-color: #111822;
+    background-color: #090b0e;
     display: flex;
     align-items: center;
     gap: 15px;
@@ -123,7 +144,9 @@ body {
 }
 
 .hero-section {
-    position: relative;
+     position: relative;
+    isolation: isolate;
+    background-color: #08090b;
     height: calc(100vh - 105px);
     text-align: center;
     border-bottom: 2px solid #b91c1c;
@@ -143,7 +166,7 @@ body {
     height: 100%;
     object-fit: cover;
     opacity: 0.5;
-    z-index: -1;
+    z-index: 0;
 }
 
 .hero-titulo {
@@ -258,11 +281,29 @@ body {
 }
 
 .seccion-plataformas {
-    background-color: #0b0e11;
-    padding: 60px 20px;
+    background-color: rgba(7, 9, 12, 0.45);
+    padding: 50px 20px;
     text-align: center;
 }
+.numero-seccion-plataformas {
+    position: relative;
+    display: inline-block;
+    color: #0059ff;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
 
+.numero-seccion-plataformas::before,
+.numero-seccion-plataformas::after {
+    content: "";
+    display: inline-block;
+    width: 35px;
+    height: 1px;
+    background: #0059ff;
+    vertical-align: middle;
+    margin: 0 12px;
+}
 .caja-qr {
     width: 110px;
     height: 110px;
@@ -339,13 +380,31 @@ body {
 }
 
 .seccion-multimedia {
-    background-color: #111822;
-    padding: 60px 20px;
+    background-color: rgba(8, 13, 22, 0.65);
+    padding: 50px 20px;
     text-align: center;
     border-top: 1px solid #1f2937;
     border-bottom: 1px solid #1f2937;
 }
+.numero-seccion-multimedia {
+    position: relative;
+    display: inline-block;
+    color: #0059ff;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
 
+.numero-seccion-multimedia::before,
+.numero-seccion-multimedia::after {
+    content: "";
+    display: inline-block;
+    width: 35px;
+    height: 1px;
+    background: #0059ff;
+    vertical-align: middle;
+    margin: 0 12px;
+}
 .descripcion-seccion {
     width: 450px;
     max-width: 90%;
@@ -408,8 +467,178 @@ body {
     display: block;
 }
 
+/* ==========================================
+   NUEVA SECCIÓN: EXHIBIDOR DE ARMAS
+========================================== */
+
+.seccion-armas {
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    padding: 40px 5px 60px;
+    background-color: rgba(7, 9, 12, 0.45);
+    border-top: 1px solid #292929;
+    border-bottom: 1px solid #292929;
+}
+
+.numero-seccion-armas {
+    position: relative;
+    display: inline-block;
+    color: #0059ff;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.numero-seccion-armas::before,
+.numero-seccion-armas::after {
+    content: "";
+    display: inline-block;
+    width: 35px;
+    height: 1px;
+    background: #0059ff;
+    vertical-align: middle;
+    margin: 0 12px;
+}
+
+.seccion-armas .titulo-seccion {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 20px;
+}
+
+.descripcion-armas {
+    color: #cbd5e1;
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+/* PANEL DEL EXHIBIDOR */
+
+.armas-exhibidor {
+    position: relative;
+    width: 100%;
+    margin: 35px auto;
+    overflow: hidden;
+
+    background: rgba(7, 9, 12, 0.45);
+    border-top: 1px solid #444;
+    border-bottom: 1px solid #444;
+}
+
+/* Línea horizontal */
+
+.armas-exhibidor::before {
+    content: "";
+    position: absolute;
+    top: 55%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: #0059ff;
+}
+
+/* CONTENEDOR ANIMADO */
+
+.armas-carrusel {
+    display: flex;
+    width: max-content;
+
+    animation: desplazamiento-armas 15s linear infinite;
+
+    position: relative;
+    z-index: 1;
+}
+
+
+/* ARMAS */
+
+.armas-grupo {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    gap: 45px;
+
+    padding: 35px 22px;
+}
+
+/* IMÁGENES */
+
+.arma-item {
+    flex: 0 0 220px;
+    height: 240px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.arma-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+
+    transition: transform 0.35s ease,
+                filter 0.35s ease;
+}
+
+/* EFECTO HOVER */
+
+.arma-item:hover img {
+    transform: scale(1.15) translateY(-8px);
+
+    filter: drop-shadow(
+        0 0 12px rgba(0, 221, 255, 0.5)
+    );
+}
+
+/* ANIMACIÓN INFINITA */
+
+@keyframes desplazamiento-armas {
+
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+
+}
+
+/* PAUSAR AL PASAR EL CURSOR */
+
+.armas-exhibidor:hover .armas-carrusel {
+    animation-play-state: paused;
+}
+
+/* MÓVILES */
+
+@media (max-width: 768px) {
+
+    .arma-item {
+        flex-basis: 170px;
+        height: 190px;
+    }
+
+    .armas-grupo {
+        gap: 20px;
+    }
+
+}
+
+/* ACCESIBILIDAD */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .armas-carrusel {
+        animation: none;
+    }
+
+}
+
 .seccion-conoce {
-    background-color: #0b0e11;
+    background-color: rgba(7, 9, 12, 0.45);
     padding: 60px 20px;
     text-align: center;
 }
@@ -458,7 +687,7 @@ body {
 }
 
 .seccion-noticias {
-    background-color: #111822;
+    background-color: rgba(8, 13, 22, 0.65);
     padding: 60px 20px;
     text-align: center;
     border-top: 1px solid #1f2937;
@@ -557,7 +786,7 @@ body {
 }
 
 .seccion-ayuda {
-    background-color: #0b0e11;
+    background-color: rgba(8, 13, 22, 0.65);
     padding: 60px 20px;
     text-align: center;
     border-top: 1px solid #1f2937;
@@ -796,6 +1025,18 @@ body {
     scrollbar-color: #b91c1c #0b0e11;
 }
 
+.seccion-plataformas > *:not(.texto-fondo),
+.seccion-multimedia > *:not(.texto-fondo),
+.seccion-conoce > *:not(.texto-fondo),
+.seccion-noticias > *:not(.texto-fondo),
+.seccion-ayuda > *:not(.texto-fondo) {
+    position: relative;
+    z-index: 1;
+}
+.hero-section > *:not(.hero-video):not(.texto-fondo) {
+    position: relative;
+    z-index: 1;
+}
 @media screen and (max-width: 1300px) {
     .header-principal {
         min-height: auto;
@@ -805,7 +1046,7 @@ body {
         align-items: center;
         justify-content: space-between;
         gap: 0;
-        background: linear-gradient(180deg, #111822 0%, #0d141c 100%);
+        background: linear-gradient(200deg, #00183a 0%, #000000 100%);
     }
     .logo-container {
         position: relative;
@@ -838,7 +1079,7 @@ body {
         flex-wrap: wrap;
         justify-content: center;
         gap: 6px;
-        background: linear-gradient(180deg, #131a20, #0d1117);
+        background: linear-gradient(180deg, #00183a, #000000);
         border-top: 1px solid #1f2937;
         border-radius: 0 0 8px 8px;
         box-shadow: inset 0 2px 20px rgba(0, 0, 0, 0.3);
