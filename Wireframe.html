@@ -72,7 +72,7 @@
 <html lang="es">
     <head>
         <meta charset="UTF-8">
-        <title>Alliance of Valiant Arms</title>
+        <title data-i18n="tituloPagina">Videojuego</title>
         <link rel="stylesheet" href="Estilos.css">
     </head>
 
@@ -83,20 +83,24 @@
             </section>
 
             <nav class="nav-principal">
-                <a href="#inicio" class="btn-nav">Inicio</a>
-                <a href="#Plataformas" class="btn-nav">Plataformas</a>
-                <a href="#multimedia" class="btn-nav">Multimedia</a>
-                <a href="#conoce" class="btn-nav">Conoce</a>
-                <a href="#noticias" class="btn-nav">Noticias</a>
-                <a href="#ayuda" class="btn-nav">Ayuda</a>
+                <a href="#inicio" class="btn-nav" data-i18n="inicio">Inicio</a>
+                <a href="#Plataformas" class="btn-nav" data-i18n="plataformas">Plataformas</a>
+                <a href="#multimedia" class="btn-nav" data-i18n="multimedia">Multimedia</a>
+                <a href="#conoce" class="btn-nav" data-i18n="conoce">Conoce</a>
+                <a href="#noticias" class="btn-nav" data-i18n="noticias">Noticias</a>
+                <a href="#ayuda" class="btn-nav" data-i18n="ayuda">Ayuda</a>
                 <a href="/dashboard" class="btn-nav">Dashboard</a>
+                <div class="selector-idioma" role="group" aria-label="Idioma / Language">
+                    <button type="button" class="btn-idioma" data-idioma="es" title="Español">ES</button>
+                    <button type="button" class="btn-idioma" data-idioma="en" title="English">EN</button>
+                </div>
             </nav>
 
-            <a href="#" class="btn-login" id="btn-login">Iniciar sesión</a>
+            <a href="#" class="btn-login" id="btn-login" data-i18n="login">Iniciar sesión</a>
             <div id="user-info" class="user-info" style="display:none;">
                 <span id="user-nombre"></span>
                 <span id="user-rol" class="badge-rol"></span>
-                <a href="#" id="btn-logout" class="btn-logout">Cerrar sesión</a>
+                <a href="#" id="btn-logout" class="btn-logout" data-i18n="logout">Cerrar sesión</a>
             </div>
         </header>
 
@@ -112,22 +116,22 @@
                     Tu navegador no soporta videos en HTML5.
                 </video>
 
-                <h1 class="hero-titulo">
+                <h1 class="hero-titulo" data-i18n="heroTitulo">
                     Alliance of Valiant Arms
                 </h1>
 
-                <p class="hero-descripcion">
+                <p class="hero-descripcion" data-i18n="heroDesc">
                     FPS táctico free-to-play donde la estrategia de equipo y la especialización de clase definen cada enfrentamiento. Elige entre Point Man, Rifle Man o Sniper y domina el campo de batalla en la guerra ficticia entre la EU y la NRF.
                 </p>
 
                 <nav class="hero-nav">
-                    <a href="#Plataformas" class="btn-hero">Conoce el juego</a>
-                    <a href="#multimedia" class="btn-hero">Ver tráiler</a>
+                    <a href="#Plataformas" class="btn-hero" data-i18n="conoceJuego">Conoce el juego</a>
+                    <a href="#multimedia" class="btn-hero" data-i18n="verTrailer">Ver trailer</a>
                 </nav>
             </section>
 
             <section id="Plataformas" class="seccion-plataformas">
-                <h2 class="titulo-seccion amplio">
+                <h2 class="titulo-seccion amplio" data-i18n="plataformasDisp">
                     Plataformas disponibles
                 </h2>
 
@@ -156,41 +160,35 @@
                     </nav>
 
                     <aside class="caja-clasificacion">
-                        <p class="texto-clasificacion">
-                            Clasificación por determinar · Violencia fantasiosa · Compras dentro del juego
+                        <p class="texto-clasificacion" data-i18n="clasificacion">
+                            Sección de clasificación de edades
                         </p>
                     </aside>
                 </div>
             </section>
 
             <section id="multimedia" class="seccion-multimedia">
-                <h2 class="titulo-seccion amplio">
+                <h2 class="titulo-seccion amplio" data-i18n="mecanicasTitulo">
                     Mecánicas básicas del juego
                 </h2>
 
-                <p class="descripcion-seccion">
-                    Sistema de clases con roles definidos: Point Man para asalto y reconocimiento, Rifle Man para combate versátil, y Sniper para eliminación a larga distancia. Cada clase posee equipo, movilidad y habilidades distintivas que exigen coordinación de equipo.
+                <p class="descripcion-seccion" data-i18n="mecanicasDesc">
+                    Descripción de las mecánicas
                 </p>
 
                 <div class="contenedor-flex-centro margen-top-50">
                     <aside class="menu-mecanicas">
                         <nav>
-                            <a href="#" class="btn-mecanica activo" data-video="Trailer.mp4" data-poster="Trailer.png">Tráiler</a>
-                            <a href="#" class="btn-mecanica" data-video="Controles.mp4" data-poster="Controles.png">Controles</a>
-                            <a href="#" class="btn-mecanica" data-video="Combate.mp4" data-poster="Combate.png">Combate</a>
-                            <a href="#" class="btn-mecanica" data-video="Estrategia.mp4" data-poster="Estrategia.png">Estrategia</a>
-                            <a href="#" class="btn-mecanica" data-video="Progresion.mp4" data-poster="Progresion.png">Progresión</a>
+                            <a href="#" class="btn-mecanica" data-i18n="controles">Controles</a>
+                            <a href="#" class="btn-mecanica" data-i18n="combate">Combate</a>
+                            <a href="#" class="btn-mecanica" data-i18n="estrategia">Estrategia</a>
+                            <a href="#" class="btn-mecanica" data-i18n="progresion">Progresión</a>
                         </nav>
                     </aside>
 
                     <article class="video-mecanicas-container">
-                        <video
-                            controls
-                            preload="metadata"
-                            class="video-mecanicas"
-                            id="video-mecanicas"
-                            poster="Trailer.png">
-                            <source src="Trailer.mp4" type="video/mp4">
+                        <video controls class="video-mecanicas">
+                            <source src="Mecanicas.mp4" type="video/mp4">
                             Tu navegador no soporta el reproductor de video.
                         </video>
                     </article>
@@ -198,7 +196,7 @@
             </section>
 
             <section id="conoce" class="seccion-conoce">
-                <h2 class="titulo-seccion medio">
+                <h2 class="titulo-seccion medio" data-i18n="conoceMas">
                     Conoce más
                 </h2>
 
@@ -207,99 +205,99 @@
                         <div class="imagen-conoce-container">
                             <img src="Conoce1.png" alt="Imagen de la wiki oficial." class="img-fit">
                         </div>
-                        <a href="#" class="btn-conoce">Wiki oficial</a>
+                        <a href="#" class="btn-conoce" data-i18n="wiki">Wiki oficial</a>
                     </article>
 
                     <article class="tarjeta-conoce">
                         <div class="imagen-conoce-container">
                             <img src="Conoce2.gif" alt="Imagen de guias y consejos." class="img-fit">
                         </div>
-                        <a href="#" class="btn-conoce">Guías y consejos</a>
+                        <a href="#" class="btn-conoce" data-i18n="guias">Guías y consejos</a>
                     </article>
 
                     <article class="tarjeta-conoce">
                         <div class="imagen-conoce-container">
                             <img src="Conoce3.png" alt="Imagen de otros proyectos." class="img-fit">
                         </div>
-                        <a href="#" class="btn-conoce">Otros proyectos</a>
+                        <a href="#" class="btn-conoce" data-i18n="otrosProyectos">Otros proyectos</a>
                     </article>
                 </div>
             </section>
 
             <section id="noticias" class="seccion-noticias">
-                <h2 class="titulo-seccion medio">
+                <h2 class="titulo-seccion medio" data-i18n="noticiasTitulo">
                     Noticias y actualizaciones
                 </h2>
 
                 <div class="carrusel-noticias-wrapper">
-                    <button class="btn-flecha" id="btn-prev">◀</button>
+                    <button class="btn-flecha" id="btn-prev" aria-label="Anterior">◀</button>
 
                     <div class="carrusel-noticias-viewport">
                         <div class="carrusel-noticias" id="carrusel-track">
                             <article class="tarjeta-noticia grande" data-indice="0">
-                                <img src="Noticia1.png" alt="Anuncio de seguridad" class="img-fit">
+                                <img src="Noticia1.png" alt="Visualización de la noticia 1. Anuncio de seguridad" class="img-fit">
                             </article>
                             <article class="tarjeta-noticia grande" data-indice="1">
-                                <img src="Noticia2.png" alt="Anuncio de actualización" class="img-fit">
+                                <img src="Noticia2.png" alt="Visualización de la noticia 2. Anuncio de actualización" class="img-fit">
                             </article>
                             <article class="tarjeta-noticia grande" data-indice="2">
-                                <img src="Noticia3.png" alt="Anuncio de seguridad" class="img-fit">
+                                <img src="Noticia3.png" alt="Visualización de la noticia 3. Anuncio de seguridad" class="img-fit">
                             </article>
                             <article class="tarjeta-noticia grande" data-indice="3">
-                                <img src="Noticia4.png" alt="Previsualización de la noticia" class="img-fit">
+                                <img src="Noticia4.png" alt="Visualización de la noticia 4. Previsualización de la noticia" class="img-fit">
                             </article>
                             <article class="tarjeta-noticia grande" data-indice="4">
-                                <img src="Noticia1.png" alt="Anuncio de seguridad" class="img-fit">
+                                <img src="Noticia1.png" alt="Visualización de la noticia 1. Anuncio de seguridad" class="img-fit">
                             </article>
                             <article class="tarjeta-noticia grande" data-indice="5">
-                                <img src="Noticia2.png" alt="Anuncio de actualización" class="img-fit">
+                                <img src="Noticia2.png" alt="Visualización de la noticia 2. Anuncio de actualización" class="img-fit">
                             </article>
                             <article class="tarjeta-noticia grande" data-indice="6">
-                                <img src="Noticia3.png" alt="Anuncio de seguridad" class="img-fit">
+                                <img src="Noticia3.png" alt="Visualización de la noticia 3. Anuncio de seguridad" class="img-fit">
                             </article>
                             <article class="tarjeta-noticia grande" data-indice="7">
-                                <img src="Noticia4.png" alt="Previsualización de la noticia" class="img-fit">
+                                <img src="Noticia4.png" alt="Visualización de la noticia 4. Previsualización de la noticia" class="img-fit">
                             </article>
                         </div>
                     </div>
 
-                    <button class="btn-flecha" id="btn-next">▶</button>
+                    <button class="btn-flecha" id="btn-next" aria-label="Siguiente">▶</button>
                 </div>
 
-                <a href="#" class="btn-todas-noticias">
+                <a href="#" class="btn-todas-noticias" data-i18n="verNoticias">
                     Ver todas las noticias
                 </a>
             </section>
 
             <section id="ayuda" class="seccion-ayuda">
-                <h2 class="titulo-seccion medio">
+                <h2 class="titulo-seccion medio" data-i18n="centroAyuda">
                     Centro de ayuda
                 </h2>
 
                 <div id="aviso-login" class="aviso-login" style="display:none;">
-                    <p>Inicia sesión para enviar tu solicitud de soporte técnico. Nuestro equipo revisará tu caso y te responderá a la brevedad.</p>
-                    <button class="btn-hero" id="btn-login-ayuda">Iniciar sesión / Registrarme</button>
+                    <p data-i18n="avisoLogin">Debes iniciar sesión para enviar tu solicitud de ayuda.</p>
+                    <button class="btn-hero" id="btn-login-ayuda" data-i18n="loginRegistro">Iniciar sesión / Registrarme</button>
                 </div>
 
                 <form id="form" class="formulario-ayuda" action="/registrar" method="post" style="display:none;">
-                    <label for="Nombre" class="form-label">Nombre del usuario:</label><br>
+                    <label for="Nombre" class="form-label" data-i18n="lblNombreUsuario">Nombre del usuario:</label><br>
                     <input type="text" id="Nombre" name="Nombre" required readonly class="form-input input-bloqueado"><br><br>
 
-                    <label for="Correo" class="form-label">Correo del usuario:</label><br>
+                    <label for="Correo" class="form-label" data-i18n="lblCorreoUsuario">Correo del usuario:</label><br>
                     <input type="email" id="Correo" name="Correo" required readonly class="form-input input-bloqueado"><br><br>
 
-                    <label for="Problema" class="form-label">Tipo de problema:</label><br>
+                    <label for="Problema" class="form-label" data-i18n="lblTipoProblema">Tipo de problema:</label><br>
                     <select id="Problema" name="Problema" class="form-select">
-                        <option value="Cuenta">Problema con la cuenta</option>
-                        <option value="Juego">Problema con el juego</option>
-                        <option value="Conexion">Problema de conexión</option>
-                        <option value="Otro">Otro</option>
+                        <option value="Cuenta" data-i18n="optCuenta">Problema con la cuenta</option>
+                        <option value="Juego" data-i18n="optJuego">Problema con el juego</option>
+                        <option value="Conexion" data-i18n="optConexion">Problema de conexión</option>
+                        <option value="Otro" data-i18n="optOtro">Otro</option>
                     </select><br><br>
 
-                    <label for="Descripcion" class="form-label">Descripción del problema:</label><br>
+                    <label for="Descripcion" class="form-label" data-i18n="lblDescProblema">Descripción del problema:</label><br>
                     <textarea id="Descripcion" name="Descripcion" rows="5" class="form-input"></textarea><br><br>
 
-                    <button type="submit" class="btn-submit">Enviar solicitud</button>
+                    <button type="submit" class="btn-submit" data-i18n="enviar">Enviar</button>
                 </form>
             </section>
         </main>
@@ -310,10 +308,10 @@
             </section>
 
             <nav class="nav-footer-links">
-                <a href="#" class="link-footer">Términos y políticas de privacidad</a>
-                <a href="#" class="link-footer">Sobre nosotros</a>
-                <a href="#" class="link-footer">Contáctanos</a>
-                <a href="#ayuda" class="link-footer">Ayuda</a>
+                <a href="#" class="link-footer" data-i18n="terminos">Términos y políticas de privacidad</a>
+                <a href="#" class="link-footer" data-i18n="sobreNosotros">Sobre nosotros</a>
+                <a href="#" class="link-footer" data-i18n="contactanos">Contáctanos</a>
+                <a href="#ayuda" class="link-footer" data-i18n="ayuda">Ayuda</a>
             </nav>
 
             <nav class="nav-footer-redes">
@@ -331,31 +329,32 @@
                 </a>
             </nav>
 
-            <p class="copyright">
+            <p class="copyright" data-i18n="copyright">
                 &copy; AeriaGames. Alliance of Valiant Arms. Todos los derechos reservados.
+                Fanpage hecha por: Juan Diego romero, Santiago Barrera y Andres Carvajal
             </p>
         </footer>
 
         <div id="modal-login" class="modal-overlay" style="display:none;">
             <div class="modal-box">
                 <button class="modal-cerrar" data-cerrar>&times;</button>
-                <h3 class="modal-titulo">Iniciar sesión</h3>
+                <h3 class="modal-titulo" data-i18n="login">Iniciar sesión</h3>
 
                 <form id="form-login" class="modal-form">
-                    <label class="form-label">Correo:</label>
+                    <label class="form-label" data-i18n="lblCorreo">Correo:</label>
                     <input type="email" name="correo" class="form-input" required>
 
-                    <label class="form-label">Contraseña:</label>
+                    <label class="form-label" data-i18n="lblPassword">Contraseña:</label>
                     <input type="password" name="password" class="form-input" required>
 
                     <p id="login-error" class="modal-error"></p>
 
-                    <button type="submit" class="btn-submit">Entrar</button>
+                    <button type="submit" class="btn-submit" data-i18n="entrar">Entrar</button>
                 </form>
 
                 <p class="modal-cambiar">
-                    ¿No tienes cuenta?
-                    <a href="#" id="ir-a-registro">Regístrate aquí</a>
+                    <span data-i18n="sinCuenta">¿No tienes cuenta?</span>
+                    <a href="#" id="ir-a-registro" data-i18n="registrateAqui">Regístrate aquí</a>
                 </p>
             </div>
         </div>
@@ -363,32 +362,31 @@
         <div id="modal-registro" class="modal-overlay" style="display:none;">
             <div class="modal-box">
                 <button class="modal-cerrar" data-cerrar>&times;</button>
-                <h3 class="modal-titulo">Crear cuenta</h3>
+                <h3 class="modal-titulo" data-i18n="crearCuenta">Crear cuenta</h3>
 
                 <form id="form-registro" class="modal-form">
-                    <label class="form-label">Nombre:</label>
+                    <label class="form-label" data-i18n="lblNombre">Nombre:</label>
                     <input type="text" name="nombre" class="form-input" required>
 
-                    <label class="form-label">Correo:</label>
+                    <label class="form-label" data-i18n="lblCorreo">Correo:</label>
                     <input type="email" name="correo" class="form-input" required>
 
-                    <label class="form-label">Contraseña (mín. 6 caracteres):</label>
+                    <label class="form-label" data-i18n="lblPasswordMin">Contraseña (mín. 6 caracteres):</label>
                     <input type="password" name="password" class="form-input" required minlength="6">
 
                     <p id="registro-error" class="modal-error"></p>
 
-                    <button type="submit" class="btn-submit">Registrarme</button>
+                    <button type="submit" class="btn-submit" data-i18n="registrarme">Registrarme</button>
                 </form>
 
                 <p class="modal-cambiar">
-                    ¿Ya tienes cuenta?
-                    <a href="#" id="ir-a-login">Inicia sesión</a>
+                    <span data-i18n="yaCuenta">¿Ya tienes cuenta?</span>
+                    <a href="#" id="ir-a-login" data-i18n="iniciaSesion">Inicia sesión</a>
                 </p>
             </div>
         </div>
 
         <script src="carrusel.js"></script>
-        <script src="mecanicas.js"></script>
-        <script src="auth.js"></script>
+        <script src="idiomas.js"></script>
     </body>
 </html>

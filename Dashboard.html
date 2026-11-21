@@ -13,69 +13,69 @@
 
     <header class="header-principal">
         <section class="logo-container"><img src="Logo.png" class="dashboard-logo"></section>
-        <nav class="nav-principal"><a href="/" class="btn-nav">Inicio</a></nav>
+        <nav class="nav-principal"><a href="/" class="btn-nav" data-i18n="inicio">Inicio</a> <div class="selector-idioma" role="group" aria-label="Idioma / Language"><button type="button" class="btn-idioma" data-idioma="es" title="Español">ES</button><button type="button" class="btn-idioma" data-idioma="en" title="English">EN</button></div></nav>
         <h1 class="dashboard-marca">Dashboard A.V.A</h1>
     </header>
 
     <div id="app">
         <main class="container dashboard-main">
-            <h2 class="dashboard-subtitulo">Panel de Control</h2>
+            <h2 class="dashboard-subtitulo" data-i18n="panelControl">Panel de Control</h2>
 
             <div class="row text-center mb-4">
                 <div class="col-md-4 mb-3">
                     <div class="dashboard-panel p-3">
-                        <h5 class="dashboard-panel-titulo">Total Solicitudes</h5>
+                        <h5 class="dashboard-panel-titulo" data-i18n="totalSolicitudes">Total Solicitudes</h5>
                         <h2 style="color:#f87171;font-weight:bold;">{{ registros.length }}</h2>
                     </div>
                 </div>
                 <div class="col-md-4 mb-3">
                     <div class="dashboard-panel p-3">
-                        <h5 class="dashboard-panel-titulo">Problema más común</h5>
+                        <h5 class="dashboard-panel-titulo" data-i18n="problemaComun">Problema más común</h5>
                         <h4 style="color:#e2e8f0;font-weight:bold;">{{ problemaComun }}</h4>
                     </div>
                 </div>
                 <div class="col-md-4 mb-3">
                     <div class="dashboard-panel p-3">
-                        <h5 class="dashboard-panel-titulo">Servidor</h5>
-                        <h4 style="color:#22c55e;font-weight:bold;">🟢 Activo</h4>
+                        <h5 class="dashboard-panel-titulo" data-i18n="servidor">Servidor</h5>
+                        <h4 style="color:#22c55e;font-weight:bold;" data-i18n="servidorActivo">🟢 Activo</h4>
                     </div>
                 </div>
             </div>
 
             <section class="dashboard-panel">
-                <h3 class="dashboard-panel-titulo">Solicitudes por tipo</h3>
+                <h3 class="dashboard-panel-titulo" data-i18n="solicitudesTipo">Solicitudes por tipo</h3>
                 <canvas ref="canvasGrafico"></canvas>
             </section>
 
             <section class="dashboard-panel">
-                <h3 class="dashboard-panel-titulo mb-3">Registros</h3>
+                <h3 class="dashboard-panel-titulo mb-3" data-i18n="registros">Registros</h3>
                 <div class="row mb-3 g-2">
-                    <div class="col-md-8"><input v-model="busqueda" class="form-input m-0" placeholder="🔍 Buscar..."></div>
+                    <div class="col-md-8"><input v-model="busqueda" class="form-input m-0" placeholder="🔍 Buscar..." data-i18n-placeholder="buscar"></div>
                     <div class="col-md-4">
                         <select v-model="filtroCategoria" class="form-select m-0">
-              <option value="">Filtrar...</option>
-              <option value="cuenta">Cuenta</option>
-              <option value="juego">Juego</option>
-              <option value="conexion">Conexión</option>
-              <option value="otro">Otro</option>
+              <option value="" data-i18n="filtrar">Filtrar...</option>
+              <option value="cuenta" data-i18n="cuenta">Cuenta</option>
+              <option value="juego" data-i18n="juego">Juego</option>
+              <option value="conexion" data-i18n="conexion">Conexión</option>
+              <option value="otro" data-i18n="otro">Otro</option>
             </select>
                     </div>
                 </div>
-                <p style="color:#e2e8f0;font-size:13px;">Mostrando {{ filtrados.length }} de {{ registros.length }}</p>
+                <p style="color:#e2e8f0;font-size:13px;">{{ t('mostrando') }} {{ filtrados.length }} {{ t('de') }} {{ registros.length }}</p>
                 <div class="table-responsive">
                     <table id="tabla-registros" class="table table-striped table-hover">
                         <thead>
                             <tr>
-                                <th>Nombre</th>
-                                <th>Correo</th>
-                                <th>Tipo</th>
-                                <th>Descripción</th>
-                                <th>Fecha</th>
+                                <th data-i18n="thNombre">Nombre</th>
+                                <th data-i18n="thCorreo">Correo</th>
+                                <th data-i18n="thTipo">Tipo</th>
+                                <th data-i18n="thDescripcion">Descripción</th>
+                                <th data-i18n="thFecha">Fecha</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-if="!filtrados.length">
-                                <td colspan="5" class="text-center py-4">Sin resultados</td>
+                                <td colspan="5" class="text-center py-4">{{ t('sinResultados') }}</td>
                             </tr>
                             <tr v-for="(r,i) in filtrados" :key="i">
                                 <td>{{ r.nombre }}</td>
@@ -83,39 +83,6 @@
                                 <td>{{ r.problema }}</td>
                                 <td>{{ r.descripcion }}</td>
                                 <td>{{ r.fecha }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-
-            <section class="dashboard-panel">
-                <h3 class="dashboard-panel-titulo mb-3">Usuarios registrados</h3>
-                <div class="table-responsive">
-                    <table id="tabla-usuarios" class="table table-striped table-hover">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nombre</th>
-                                <th>Correo</th>
-                                <th>Rol</th>
-                                <th>Fecha registro</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-if="!usuarios.length">
-                                <td colspan="5" class="text-center py-4">Sin usuarios</td>
-                            </tr>
-                            <tr v-for="u in usuarios" :key="u.id">
-                                <td>{{ u.id }}</td>
-                                <td>{{ u.nombre }}</td>
-                                <td>{{ u.correo }}</td>
-                                <td>
-                                    <span :class="u.rol === 'administrador' ? 'badge-admin' : 'badge-user'" class="badge-rol">
-                                        {{ u.rol.toUpperCase() }}
-                                    </span>
-                                </td>
-                                <td>{{ new Date(u.fecha_registro).toLocaleString('es-CO') }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -131,6 +98,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="idiomas.js"></script>
     <script>
         const {
             createApp,
@@ -144,11 +112,17 @@
         createApp({
             setup() {
                 const registros = ref([]),
-                    usuarios = ref([]),
                     busqueda = ref(''),
                     filtroCategoria = ref(''),
                     canvasGrafico = ref(null);
                 let grafico = null;
+
+                const lang = ref(idiomaActual);
+                const tt = k => { lang.value; return t(k); };
+                document.addEventListener('idioma-cambiado', e => {
+                    lang.value = e.detail;
+                    nextTick(renderGrafico);
+                });
 
                 const norm = r => ({
                     nombre: r.Nombre || r.nombre || '-',
@@ -189,7 +163,7 @@
                         data: {
                             labels: Object.keys(conteoPorProblema.value),
                             datasets: [{
-                                label: 'Solicitudes',
+                                label: tt('solicitudes'),
                                 data: Object.values(conteoPorProblema.value),
                                 backgroundColor: 'rgba(185,28,28,0.35)',
                                 borderColor: '#b91c1c',
@@ -227,37 +201,23 @@
 
                 onMounted(async() => {
                     try {
-                        const respSesion = await fetch('/api/sesion', { credentials: 'same-origin' });
-                        const dataSesion = await respSesion.json();
-                        if (!dataSesion.logueado || dataSesion.usuario.rol !== 'administrador') {
-                            window.location.href = '/?acceso=denegado';
-                            return;
-                        }
-
                         const res = await fetch('/datos', { credentials: 'same-origin' });
-                        const data = await res.json();
-                        if (!data.ok) {
-                            window.location.href = '/?acceso=denegado';
+                        const json = await res.json();
+                        if (!json.ok) {
+                            console.error('Error del servidor:', json.error);
                             return;
                         }
-                        registros.value = data.datos.map(norm);
-
-                        const resUsuarios = await fetch('/api/usuarios', { credentials: 'same-origin' });
-                        const dataUsuarios = await resUsuarios.json();
-                        if (dataUsuarios.ok) {
-                            usuarios.value = dataUsuarios.usuarios;
-                        }
-
+                        registros.value = json.datos.map(norm);
                         await nextTick();
                         renderGrafico();
                     } catch (e) {
-                        window.location.href = '/?acceso=denegado';
+                        console.error(e);
                     }
                 });
 
                 return {
+                    t: tt,
                     registros,
-                    usuarios,
                     busqueda,
                     filtroCategoria,
                     filtrados,

@@ -315,40 +315,8 @@ const servidor = http.createServer(async (req, res) => {
       res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
       return res.end('404 - Archivo no encontrado');
     }
-
     const extension = path.extname(archivo).toLowerCase();
-    const tipo = tipos[extension] || 'application/octet-stream';
-    const stat = fs.statSync(archivo);
-    const total = stat.size;
-    const range = req.headers.range;
-
-    if (range) {
-      const match = range.match(/bytes=(\d*)-(\d*)/);
-      let inicio = match && match[1] ? parseInt(match[1], 10) : 0;
-      let fin = match && match[2] ? parseInt(match[2], 10) : total - 1;
-      if (isNaN(inicio) || inicio < 0) inicio = 0;
-      if (isNaN(fin) || fin >= total) fin = total - 1;
-      if (inicio > fin) {
-        res.writeHead(416, { 'Content-Range': 'bytes */' + total });
-        return res.end();
-      }
-      res.writeHead(206, {
-        'Content-Type': tipo,
-        'Content-Length': (fin - inicio + 1),
-        'Content-Range': 'bytes ' + inicio + '-' + fin + '/' + total,
-        'Accept-Ranges': 'bytes',
-        'Cache-Control': 'no-cache'
-      });
-      const stream = fs.createReadStream(archivo, { start: inicio, end: fin });
-      return stream.pipe(res);
-    }
-
-    res.writeHead(200, {
-      'Content-Type': tipo,
-      'Content-Length': total,
-      'Accept-Ranges': 'bytes',
-      'Cache-Control': 'no-cache'
-    });
+    res.writeHead(200, { 'Content-Type': tipos[extension] || 'application/octet-stream' });
     return res.end(fs.readFileSync(archivo));
   }
 
