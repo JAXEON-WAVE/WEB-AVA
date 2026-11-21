@@ -22,8 +22,9 @@ body {
     gap: 15px;
     border-bottom: 2px solid #b91c1c;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-    position: relative;
-    z-index: 10;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
     flex-wrap: nowrap;
 }
 
@@ -382,6 +383,16 @@ body {
     transform: translateX(4px);
 }
 
+.btn-mecanica.activo {
+    background-color: #b91c1c;
+    border-color: #b91c1c;
+    border-left-color: #f87171;
+    color: #ffffff;
+    font-weight: bold;
+    transform: translateX(4px);
+    box-shadow: 0 4px 15px rgba(185, 28, 28, 0.4);
+}
+
 .video-mecanicas-container {
     width: 720px;
     max-width: 100%;
@@ -397,8 +408,9 @@ body {
 .video-mecanicas {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     display: block;
+    background-color: #000;
 }
 
 .seccion-conoce {
@@ -457,12 +469,27 @@ body {
     border-top: 1px solid #1f2937;
 }
 
-.carrusel-noticias {
+.carrusel-noticias-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 35px;
     gap: 15px;
+    margin-top: 35px;
+    padding: 0 10px;
+}
+
+.carrusel-noticias-viewport {
+    overflow: hidden;
+    flex: 1 1 auto;
+    max-width: 1200px;
+    border-radius: 4px;
+}
+
+.carrusel-noticias {
+    display: flex;
+    gap: 15px;
+    transition: transform 0.5s ease;
+    will-change: transform;
 }
 
 .btn-flecha {
@@ -474,6 +501,7 @@ body {
     border-radius: 4px;
     cursor: pointer;
     transition: all 0.2s;
+    flex-shrink: 0;
 }
 
 .btn-flecha:hover {
@@ -491,6 +519,7 @@ body {
     overflow: hidden;
     border-radius: 4px;
     transition: 0.2s;
+    flex-shrink: 0;
 }
 
 .tarjeta-noticia.grande {
@@ -508,18 +537,8 @@ body {
     border-color: #b91c1c;
 }
 
-.bar-slider {
-    width: 60%;
-    margin: 25px auto;
-    background-color: #0b0e11;
-    border: 1px solid #1f2937;
-    color: #64748b;
-    padding: 6px;
-    font-size: 12px;
-    border-radius: 4px;
-}
-
 .btn-todas-noticias {
+    margin-top: 40px;
     background: #b91c1c;
     display: inline-block;
     border: 1px solid #b91c1c;
@@ -586,6 +605,18 @@ body {
 .form-input:focus,
 .form-select:focus {
     border-color: #b91c1c;
+}
+
+.input-bloqueado {
+    background-color: #1a2230 !important;
+    color: #94a3b8 !important;
+    cursor: not-allowed;
+    border-color: #273444 !important;
+}
+
+.input-bloqueado:focus {
+    border-color: #273444 !important;
+    outline: none;
 }
 
 .btn-submit {
@@ -680,6 +711,236 @@ body {
     }
 }
 
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: auto;
+    padding: 8px 14px;
+    background-color: #161e29;
+    border: 1px solid #273444;
+    border-radius: 6px;
+    flex-shrink: 0;
+}
+
+#user-nombre {
+    color: #e2e8f0;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.badge-rol {
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    display: inline-block;
+}
+
+.badge-admin {
+    background-color: #b91c1c;
+    color: #fff;
+}
+
+.badge-user {
+    background-color: #273444;
+    color: #cbd5e1;
+}
+
+.btn-logout {
+    color: #f87171;
+    text-decoration: none;
+    font-size: 12px;
+    padding: 4px 10px;
+    border: 1px solid #b91c1c;
+    border-radius: 4px;
+    transition: 0.2s;
+}
+
+.btn-logout:hover {
+    background-color: #b91c1c;
+    color: #fff;
+}
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(4px);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-box {
+    position: relative;
+    background-color: #111822;
+    border: 1px solid #273444;
+    border-top: 3px solid #b91c1c;
+    border-radius: 8px;
+    padding: 32px 28px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+    animation: modalSlide 0.3s ease;
+}
+
+@keyframes modalSlide {
+    from { transform: translateY(-30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-cerrar {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    font-size: 28px;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+    transition: 0.2s;
+}
+
+.modal-cerrar:hover {
+    color: #f87171;
+}
+
+.modal-titulo {
+    color: #ffffff;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 18px;
+    margin: 0 0 22px;
+}
+
+.modal-form .form-label {
+    display: block;
+    margin-top: 12px;
+}
+
+.modal-form .form-input {
+    margin-top: 6px;
+}
+
+.modal-error {
+    color: #f87171;
+    font-size: 13px;
+    margin: 10px 0 0;
+    min-height: 18px;
+}
+
+.modal-cambiar {
+    text-align: center;
+    color: #94a3b8;
+    font-size: 13px;
+    margin: 18px 0 0;
+}
+
+.modal-cambiar a {
+    color: #f87171;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.modal-cambiar a:hover {
+    text-decoration: underline;
+}
+
+.aviso-login {
+    max-width: 480px;
+    margin: 30px auto;
+    padding: 24px;
+    background-color: #111822;
+    border: 1px solid #1f2937;
+    border-left: 4px solid #b91c1c;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.aviso-login p {
+    color: #cbd5e1;
+    margin: 0 0 18px;
+    font-size: 14px;
+}
+
+.alerta-acceso {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 22px;
+    max-width: 640px;
+    width: calc(100% - 40px);
+    background-color: #7f1d1d;
+    border: 2px solid #b91c1c;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    animation: alertaSlide 0.4s ease;
+}
+
+.alerta-acceso.error {
+    background-color: #7f1d1d;
+    border-color: #b91c1c;
+}
+
+.alerta-acceso.exito {
+    background-color: #14532d;
+    border-color: #22c55e;
+}
+
+.alerta-acceso.info {
+    background-color: #1e3a5f;
+    border-color: #3b82f6;
+}
+
+@keyframes alertaSlide {
+    from { transform: translate(-50%, -30px); opacity: 0; }
+    to { transform: translate(-50%, 0); opacity: 1; }
+}
+
+#alerta-texto {
+    flex: 1;
+    line-height: 1.4;
+}
+
+.alerta-cerrar {
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0 4px;
+    opacity: 0.85;
+    transition: 0.2s;
+    flex-shrink: 0;
+}
+
+.alerta-cerrar:hover {
+    opacity: 1;
+    color: #fecaca;
+}
+
 .dashboard-marca {
     margin: 0 30px 0 auto;
     font-size: 20px;
@@ -735,7 +996,8 @@ body {
     font-weight: 600;
 }
 
-#tabla-registros {
+#tabla-registros,
+#tabla-usuarios {
     --bs-table-color: #e2e8f0;
     --bs-table-bg: #0b0e11;
     --bs-table-striped-color: #e2e8f0;
@@ -748,7 +1010,8 @@ body {
     font-size: 14px;
 }
 
-#tabla-registros thead th {
+#tabla-registros thead th,
+#tabla-usuarios thead th {
     background-color: #161e29;
     border-bottom: 2px solid #b91c1c;
     color: #f87171;
@@ -759,7 +1022,8 @@ body {
     white-space: nowrap;
 }
 
-#tabla-registros tbody td {
+#tabla-registros tbody td,
+#tabla-usuarios tbody td {
     padding: 12px;
     vertical-align: middle;
 }
@@ -797,6 +1061,11 @@ body {
         padding: 11px 22px;
         font-size: 12px;
         align-self: center;
+        margin-bottom: 12px;
+    }
+    .user-info {
+        order: 1;
+        margin-left: auto;
         margin-bottom: 12px;
     }
     .nav-principal {
@@ -904,6 +1173,9 @@ body {
     .btn-mecanica:hover {
         transform: translateY(-2px);
     }
+    .btn-mecanica.activo {
+        transform: translateY(-2px);
+    }
     .video-mecanicas-container {
         width: 85%;
         margin-left: 0;
@@ -911,9 +1183,6 @@ body {
     .seccion-conoce .contenedor-flex-centro {
         flex-wrap: wrap;
         gap: 25px;
-    }
-    .tarjeta-noticia.pequeña {
-        display: none;
     }
     .formulario-ayuda {
         width: 90%;
@@ -928,7 +1197,8 @@ body {
     .dashboard-panel {
         padding: 20px;
     }
-    #tabla-registros {
+    #tabla-registros,
+    #tabla-usuarios {
         font-size: 13px;
     }
 }
@@ -1066,29 +1336,18 @@ body {
     .tarjeta-conoce {
         margin: 0;
     }
-    .carrusel-noticias {
-        display: grid;
-        grid-template-columns: 40px 1fr 40px;
+    .carrusel-noticias-wrapper {
         gap: 8px;
-    }
-    .tarjeta-noticia.grande {
-        display: none;
-    }
-    .tarjeta-noticia.grande:first-of-type {
-        display: flex;
-        width: 100%;
-        height: 200px;
-        grid-column: 2;
-    }
-    .tarjeta-noticia.pequeña {
-        display: none;
+        padding: 0;
     }
     .btn-flecha {
-        width: 40px;
-        padding: 10px 0;
+        width: 36px;
+        padding: 8px 0;
+        font-size: 14px;
     }
-    .bar-slider {
-        width: 90%;
+    .tarjeta-noticia.grande {
+        width: 160px;
+        height: 140px;
     }
     .formulario-ayuda {
         width: 100%;
@@ -1130,15 +1389,18 @@ body {
         font-size: 12px;
         margin-bottom: 15px;
     }
-    #tabla-registros {
+    #tabla-registros,
+    #tabla-usuarios {
         font-size: 12px;
     }
-    #tabla-registros thead th {
+    #tabla-registros thead th,
+    #tabla-usuarios thead th {
         padding: 9px 8px;
         font-size: 10px;
         letter-spacing: 0.5px;
     }
-    #tabla-registros tbody td {
+    #tabla-registros tbody td,
+    #tabla-usuarios tbody td {
         padding: 9px 8px;
         font-size: 12px;
     }
@@ -1188,13 +1450,14 @@ body {
     .menu-mecanicas nav {
         grid-template-columns: 1fr;
     }
-    .tarjeta-noticia.grande:first-of-type {
-        height: 160px;
-    }
     .titulo-seccion.amplio,
     .titulo-seccion.medio {
         font-size: 13px;
         padding: 10px;
+    }
+    .tarjeta-noticia.grande {
+        width: 130px;
+        height: 120px;
     }
     .formulario-ayuda {
         padding: 18px 12px;
@@ -1228,14 +1491,17 @@ body {
         letter-spacing: 1px;
         margin-bottom: 12px;
     }
-    #tabla-registros {
+    #tabla-registros,
+    #tabla-usuarios {
         font-size: 11px;
     }
-    #tabla-registros thead th {
+    #tabla-registros thead th,
+    #tabla-usuarios thead th {
         padding: 8px 6px;
         font-size: 9px;
     }
-    #tabla-registros tbody td {
+    #tabla-registros tbody td,
+    #tabla-usuarios tbody td {
         padding: 8px 6px;
         font-size: 11px;
     }

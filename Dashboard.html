@@ -88,6 +88,39 @@
                     </table>
                 </div>
             </section>
+
+            <section class="dashboard-panel">
+                <h3 class="dashboard-panel-titulo mb-3">Usuarios registrados</h3>
+                <div class="table-responsive">
+                    <table id="tabla-usuarios" class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Correo</th>
+                                <th>Rol</th>
+                                <th>Fecha registro</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-if="!usuarios.length">
+                                <td colspan="5" class="text-center py-4">Sin usuarios</td>
+                            </tr>
+                            <tr v-for="u in usuarios" :key="u.id">
+                                <td>{{ u.id }}</td>
+                                <td>{{ u.nombre }}</td>
+                                <td>{{ u.correo }}</td>
+                                <td>
+                                    <span :class="u.rol === 'administrador' ? 'badge-admin' : 'badge-user'" class="badge-rol">
+                                        {{ u.rol.toUpperCase() }}
+                                    </span>
+                                </td>
+                                <td>{{ new Date(u.fecha_registro).toLocaleString('es-CO') }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
         </main>
     </div>
 
@@ -111,6 +144,7 @@
         createApp({
             setup() {
                 const registros = ref([]),
+                    usuarios = ref([]),
                     busqueda = ref(''),
                     filtroCategoria = ref(''),
                     canvasGrafico = ref(null);
@@ -193,17 +227,37 @@
 
                 onMounted(async() => {
                     try {
-                        const res = await fetch('/datos');
-                        registros.value = (await res.json()).map(norm);
+                        const respSesion = await fetch('/api/sesion', { credentials: 'same-origin' });
+                        const dataSesion = await respSesion.json();
+                        if (!dataSesion.logueado || dataSesion.usuario.rol !== 'administrador') {
+                            window.location.href = '/?acceso=denegado';
+                            return;
+                        }
+
+                        const res = await fetch('/datos', { credentials: 'same-origin' });
+                        const data = await res.json();
+                        if (!data.ok) {
+                            window.location.href = '/?acceso=denegado';
+                            return;
+                        }
+                        registros.value = data.datos.map(norm);
+
+                        const resUsuarios = await fetch('/api/usuarios', { credentials: 'same-origin' });
+                        const dataUsuarios = await resUsuarios.json();
+                        if (dataUsuarios.ok) {
+                            usuarios.value = dataUsuarios.usuarios;
+                        }
+
                         await nextTick();
                         renderGrafico();
                     } catch (e) {
-                        console.error(e);
+                        window.location.href = '/?acceso=denegado';
                     }
                 });
 
                 return {
                     registros,
+                    usuarios,
                     busqueda,
                     filtroCategoria,
                     filtrados,

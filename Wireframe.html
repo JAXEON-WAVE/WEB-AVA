@@ -72,7 +72,7 @@
 <html lang="es">
     <head>
         <meta charset="UTF-8">
-        <title>Videojuego</title>
+        <title>Alliance of Valiant Arms</title>
         <link rel="stylesheet" href="Estilos.css">
     </head>
 
@@ -113,16 +113,16 @@
                 </video>
 
                 <h1 class="hero-titulo">
-                    Nombre del videojuego
+                    Alliance of Valiant Arms
                 </h1>
 
                 <p class="hero-descripcion">
-                    Descripción breve del videojuego
+                    FPS táctico free-to-play donde la estrategia de equipo y la especialización de clase definen cada enfrentamiento. Elige entre Point Man, Rifle Man o Sniper y domina el campo de batalla en la guerra ficticia entre la EU y la NRF.
                 </p>
 
                 <nav class="hero-nav">
                     <a href="#Plataformas" class="btn-hero">Conoce el juego</a>
-                    <a href="#multimedia" class="btn-hero">Ver trailer</a>
+                    <a href="#multimedia" class="btn-hero">Ver tráiler</a>
                 </nav>
             </section>
 
@@ -157,7 +157,7 @@
 
                     <aside class="caja-clasificacion">
                         <p class="texto-clasificacion">
-                            Sección de clasificación de edades
+                            Clasificación por determinar · Violencia fantasiosa · Compras dentro del juego
                         </p>
                     </aside>
                 </div>
@@ -169,22 +169,28 @@
                 </h2>
 
                 <p class="descripcion-seccion">
-                    Descripción de las mecánicas
+                    Sistema de clases con roles definidos: Point Man para asalto y reconocimiento, Rifle Man para combate versátil, y Sniper para eliminación a larga distancia. Cada clase posee equipo, movilidad y habilidades distintivas que exigen coordinación de equipo.
                 </p>
 
                 <div class="contenedor-flex-centro margen-top-50">
                     <aside class="menu-mecanicas">
                         <nav>
-                            <a href="#" class="btn-mecanica">Controles</a>
-                            <a href="#" class="btn-mecanica">Combate</a>
-                            <a href="#" class="btn-mecanica">Estrategia</a>
-                            <a href="#" class="btn-mecanica">Progresión</a>
+                            <a href="#" class="btn-mecanica activo" data-video="Trailer.mp4" data-poster="Trailer.png">Tráiler</a>
+                            <a href="#" class="btn-mecanica" data-video="Controles.mp4" data-poster="Controles.png">Controles</a>
+                            <a href="#" class="btn-mecanica" data-video="Combate.mp4" data-poster="Combate.png">Combate</a>
+                            <a href="#" class="btn-mecanica" data-video="Estrategia.mp4" data-poster="Estrategia.png">Estrategia</a>
+                            <a href="#" class="btn-mecanica" data-video="Progresion.mp4" data-poster="Progresion.png">Progresión</a>
                         </nav>
                     </aside>
 
                     <article class="video-mecanicas-container">
-                        <video controls class="video-mecanicas">
-                            <source src="Mecanicas.mp4" type="video/mp4">
+                        <video
+                            controls
+                            preload="metadata"
+                            class="video-mecanicas"
+                            id="video-mecanicas"
+                            poster="Trailer.png">
+                            <source src="Trailer.mp4" type="video/mp4">
                             Tu navegador no soporta el reproductor de video.
                         </video>
                     </article>
@@ -225,30 +231,39 @@
                     Noticias y actualizaciones
                 </h2>
 
-                <div class="carrusel-noticias">
-                    <button class="btn-flecha">◀</button>
+                <div class="carrusel-noticias-wrapper">
+                    <button class="btn-flecha" id="btn-prev">◀</button>
 
-                    <article class="tarjeta-noticia grande">
-                        <img src="Noticia1.png" alt="Visualización de la noticia 1. Anuncio de seguridad" class="img-fit">
-                    </article>
+                    <div class="carrusel-noticias-viewport">
+                        <div class="carrusel-noticias" id="carrusel-track">
+                            <article class="tarjeta-noticia grande" data-indice="0">
+                                <img src="Noticia1.png" alt="Anuncio de seguridad" class="img-fit">
+                            </article>
+                            <article class="tarjeta-noticia grande" data-indice="1">
+                                <img src="Noticia2.png" alt="Anuncio de actualización" class="img-fit">
+                            </article>
+                            <article class="tarjeta-noticia grande" data-indice="2">
+                                <img src="Noticia3.png" alt="Anuncio de seguridad" class="img-fit">
+                            </article>
+                            <article class="tarjeta-noticia grande" data-indice="3">
+                                <img src="Noticia4.png" alt="Previsualización de la noticia" class="img-fit">
+                            </article>
+                            <article class="tarjeta-noticia grande" data-indice="4">
+                                <img src="Noticia1.png" alt="Anuncio de seguridad" class="img-fit">
+                            </article>
+                            <article class="tarjeta-noticia grande" data-indice="5">
+                                <img src="Noticia2.png" alt="Anuncio de actualización" class="img-fit">
+                            </article>
+                            <article class="tarjeta-noticia grande" data-indice="6">
+                                <img src="Noticia3.png" alt="Anuncio de seguridad" class="img-fit">
+                            </article>
+                            <article class="tarjeta-noticia grande" data-indice="7">
+                                <img src="Noticia4.png" alt="Previsualización de la noticia" class="img-fit">
+                            </article>
+                        </div>
+                    </div>
 
-                    <article class="tarjeta-noticia grande">
-                        <img src="Noticia2.png" alt="Visualización de la noticia 2. Anuncio de actualización" class="img-fit">
-                    </article>
-
-                    <article class="tarjeta-noticia grande">
-                        <img src="Noticia3.png" alt="Visualización de la noticia 3. Anuncio de seguridad" class="img-fit">
-                    </article>
-
-                    <article class="tarjeta-noticia pequeña">
-                        <img src="Noticia4.png" alt="Visualización de la noticia 4. Previsualización de la noticia" class="img-fit">
-                    </article>
-
-                    <button class="btn-flecha">▶</button>
-                </div>
-
-                <div class="bar-slider">
-                    Slider
+                    <button class="btn-flecha" id="btn-next">▶</button>
                 </div>
 
                 <a href="#" class="btn-todas-noticias">
@@ -262,7 +277,7 @@
                 </h2>
 
                 <div id="aviso-login" class="aviso-login" style="display:none;">
-                    <p>Debes iniciar sesión para enviar tu solicitud de ayuda.</p>
+                    <p>Inicia sesión para enviar tu solicitud de soporte técnico. Nuestro equipo revisará tu caso y te responderá a la brevedad.</p>
                     <button class="btn-hero" id="btn-login-ayuda">Iniciar sesión / Registrarme</button>
                 </div>
 
@@ -284,7 +299,7 @@
                     <label for="Descripcion" class="form-label">Descripción del problema:</label><br>
                     <textarea id="Descripcion" name="Descripcion" rows="5" class="form-input"></textarea><br><br>
 
-                    <button type="submit" class="btn-submit">Enviar</button>
+                    <button type="submit" class="btn-submit">Enviar solicitud</button>
                 </form>
             </section>
         </main>
@@ -318,7 +333,6 @@
 
             <p class="copyright">
                 &copy; AeriaGames. Alliance of Valiant Arms. Todos los derechos reservados.
-                Fanpage hecha por: Juan Diego romero, Santiago Barrera y Andres Carvajal
             </p>
         </footer>
 
@@ -373,6 +387,8 @@
             </div>
         </div>
 
+        <script src="carrusel.js"></script>
+        <script src="mecanicas.js"></script>
         <script src="auth.js"></script>
     </body>
 </html>
