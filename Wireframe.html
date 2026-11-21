@@ -92,10 +92,18 @@
                 <a href="/dashboard" class="btn-nav">Dashboard</a>
             </nav>
 
-            <a href="#" class="btn-login" onclick="document.getElementById('form').style.display='block'">
-                Iniciar sesión
-            </a>
+            <a href="#" class="btn-login" id="btn-login">Iniciar sesión</a>
+            <div id="user-info" class="user-info" style="display:none;">
+                <span id="user-nombre"></span>
+                <span id="user-rol" class="badge-rol"></span>
+                <a href="#" id="btn-logout" class="btn-logout">Cerrar sesión</a>
+            </div>
         </header>
+
+        <div id="alerta-acceso" class="alerta-acceso" style="display:none;">
+            <span id="alerta-texto"></span>
+            <button id="alerta-cerrar" class="alerta-cerrar">&times;</button>
+        </div>
 
         <main>
             <section id="inicio" class="hero-section">
@@ -253,12 +261,17 @@
                     Centro de ayuda
                 </h2>
 
-                <form id="form" class="formulario-ayuda" action="/registrar" method="post">
+                <div id="aviso-login" class="aviso-login" style="display:none;">
+                    <p>Debes iniciar sesión para enviar tu solicitud de ayuda.</p>
+                    <button class="btn-hero" id="btn-login-ayuda">Iniciar sesión / Registrarme</button>
+                </div>
+
+                <form id="form" class="formulario-ayuda" action="/registrar" method="post" style="display:none;">
                     <label for="Nombre" class="form-label">Nombre del usuario:</label><br>
-                    <input type="text" id="Nombre" name="Nombre" required class="form-input"><br><br>
+                    <input type="text" id="Nombre" name="Nombre" required readonly class="form-input input-bloqueado"><br><br>
 
                     <label for="Correo" class="form-label">Correo del usuario:</label><br>
-                    <input type="email" id="Correo" name="Correo" required class="form-input"><br><br>
+                    <input type="email" id="Correo" name="Correo" required readonly class="form-input input-bloqueado"><br><br>
 
                     <label for="Problema" class="form-label">Tipo de problema:</label><br>
                     <select id="Problema" name="Problema" class="form-select">
@@ -308,5 +321,58 @@
                 Fanpage hecha por: Juan Diego romero, Santiago Barrera y Andres Carvajal
             </p>
         </footer>
+
+        <div id="modal-login" class="modal-overlay" style="display:none;">
+            <div class="modal-box">
+                <button class="modal-cerrar" data-cerrar>&times;</button>
+                <h3 class="modal-titulo">Iniciar sesión</h3>
+
+                <form id="form-login" class="modal-form">
+                    <label class="form-label">Correo:</label>
+                    <input type="email" name="correo" class="form-input" required>
+
+                    <label class="form-label">Contraseña:</label>
+                    <input type="password" name="password" class="form-input" required>
+
+                    <p id="login-error" class="modal-error"></p>
+
+                    <button type="submit" class="btn-submit">Entrar</button>
+                </form>
+
+                <p class="modal-cambiar">
+                    ¿No tienes cuenta?
+                    <a href="#" id="ir-a-registro">Regístrate aquí</a>
+                </p>
+            </div>
+        </div>
+
+        <div id="modal-registro" class="modal-overlay" style="display:none;">
+            <div class="modal-box">
+                <button class="modal-cerrar" data-cerrar>&times;</button>
+                <h3 class="modal-titulo">Crear cuenta</h3>
+
+                <form id="form-registro" class="modal-form">
+                    <label class="form-label">Nombre:</label>
+                    <input type="text" name="nombre" class="form-input" required>
+
+                    <label class="form-label">Correo:</label>
+                    <input type="email" name="correo" class="form-input" required>
+
+                    <label class="form-label">Contraseña (mín. 6 caracteres):</label>
+                    <input type="password" name="password" class="form-input" required minlength="6">
+
+                    <p id="registro-error" class="modal-error"></p>
+
+                    <button type="submit" class="btn-submit">Registrarme</button>
+                </form>
+
+                <p class="modal-cambiar">
+                    ¿Ya tienes cuenta?
+                    <a href="#" id="ir-a-login">Inicia sesión</a>
+                </p>
+            </div>
+        </div>
+
+        <script src="auth.js"></script>
     </body>
 </html>
