@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title data-i18n="noticiasPaginaTitulo">Noticias y actualizaciones - A.V.A</title>
+        <link rel="stylesheet" href="Estilos.css">
+    </head>
+
+    <body>
+        <header class="header-principal">
+            <section class="logo-container">
+                <img src="Logo.png" alt="Imagen del logo">
+            </section>
+
+            <nav class="nav-principal">
+                <a href="/" class="btn-nav" data-i18n="inicio">Inicio</a>
+                <a href="/armas" class="btn-nav" data-i18n="armas">Armas</a>
+                <a href="/#Plataformas" class="btn-nav" data-i18n="plataformas">Plataformas</a>
+                <a href="/#multimedia" class="btn-nav" data-i18n="multimedia">Multimedia</a>
+                <a href="/#conoce" class="btn-nav" data-i18n="conoce">Conoce</a>
+                <a href="/noticias" class="btn-nav activo" data-i18n="noticias">Noticias</a>
+                <a href="/#ayuda" class="btn-nav" data-i18n="ayuda">Ayuda</a>
+                <a href="/dashboard" class="btn-nav" id="link-dashboard" style="display:none;">Dashboard</a>
+                <div class="selector-idioma" role="group" aria-label="Idioma / Language">
+                    <button type="button" class="btn-idioma" data-idioma="es" title="Español">ES</button>
+                    <button type="button" class="btn-idioma" data-idioma="en" title="English">EN</button>
+                </div>
+            </nav>
+
+            <a href="#" class="btn-login" id="btn-login" data-i18n="login">Iniciar sesión</a>
+            <div id="user-info" class="user-info" style="display:none;">
+                <span id="user-nombre"></span>
+                <span id="user-rol" class="badge-rol"></span>
+                <a href="#" id="btn-logout" class="btn-logout" data-i18n="logout">Cerrar sesión</a>
+            </div>
+        </header>
+
+        <div id="modal-login" class="modal-overlay" style="display:none;">
+            <div class="modal-box">
+                <button class="modal-cerrar" data-cerrar>&times;</button>
+                <h3 class="modal-titulo" data-i18n="login">Iniciar sesión</h3>
+
+                <form id="form-login" class="modal-form">
+                    <label class="form-label" data-i18n="lblCorreo">Correo:</label>
+                    <input type="email" name="correo" class="form-input" required>
+
+                    <label class="form-label" data-i18n="lblPassword">Contraseña:</label>
+                    <input type="password" name="password" class="form-input" required>
+
+                    <p id="login-error" class="modal-error"></p>
+
+                    <button type="submit" class="btn-submit" data-i18n="entrar">Entrar</button>
+                </form>
+
+                <p class="modal-cambiar">
+                    <span data-i18n="sinCuenta">¿No tienes cuenta?</span>
+                    <a href="#" id="ir-a-registro" data-i18n="registrateAqui">Regístrate aquí</a>
+                </p>
+            </div>
+        </div>
+
+        <div id="modal-registro" class="modal-overlay" style="display:none;">
+            <div class="modal-box">
+                <button class="modal-cerrar" data-cerrar>&times;</button>
+                <h3 class="modal-titulo" data-i18n="crearCuenta">Crear cuenta</h3>
+
+                <form id="form-registro" class="modal-form">
+                    <label class="form-label" data-i18n="lblNombre">Nombre:</label>
+                    <input type="text" name="nombre" class="form-input" required>
+
+                    <label class="form-label" data-i18n="lblCorreo">Correo:</label>
+                    <input type="email" name="correo" class="form-input" required>
+
+                    <label class="form-label" data-i18n="lblPasswordMin">Contraseña (mín. 6 caracteres):</label>
+                    <input type="password" name="password" class="form-input" required minlength="6">
+
+                    <p id="registro-error" class="modal-error"></p>
+
+                    <button type="submit" class="btn-submit" data-i18n="registrarme">Registrarme</button>
+                </form>
+
+                <p class="modal-cambiar">
+                    <span data-i18n="yaCuenta">¿Ya tienes cuenta?</span>
+                    <a href="#" id="ir-a-login" data-i18n="iniciaSesion">Inicia sesión</a>
+                </p>
+            </div>
+        </div>
+
+        <section class="noticias-hero">
+            <video autoplay loop muted playsinline class="hero-video">
+                <source src="Cinematica.mp4" type="video/mp4">
+            </video>
+            <h1 class="hero-titulo" data-i18n="noticiasPaginaTitulo">Noticias y actualizaciones</h1>
+            <p class="hero-descripcion" data-i18n="noticiasPaginaDesc">
+                Todas las novedades, parches, eventos y comunicados oficiales de Alliance of Valiant Arms en un solo lugar.
+            </p>
+        </section>
+
+        <main class="noticias-main">
+
+            <article class="noticia-destacada">
+                <div class="noticia-destacada-imagen">
+                    <img src="Noticia2.png" alt="Actualización 3.4" class="img-fit">
+                    <span class="noticia-badge" data-i18n="categoriaActualizacion">Actualización</span>
+                </div>
+                <div class="noticia-destacada-info">
+                    <p class="noticia-fecha" data-i18n="fechaDestacada">21 de noviembre de 2026 · 5 min de lectura</p>
+                    <h2 class="noticia-destacada-titulo" data-i18n="destacadaTitulo">
+                        Parche 3.4 "Operación Tormenta": nuevo mapa, armas y ajustes de balance
+                    </h2>
+                    <p class="noticia-destacada-desc" data-i18n="destacadaDesc">
+                        La mayor actualización del año llega con el mapa inédito "Puerto Norte", tres armas nuevas, sistema de rangos renovado y una reestructuración completa del matchmaking competitivo.
+                    </p>
+                    <a href="#" class="btn-hero noticia-leer" data-i18n="leerMas">Leer noticia completa</a>
+                </div>
+            </article>
+
+            <section class="noticias-grid">
+
+                <article class="noticia-card">
+                    <div class="noticia-card-imagen">
+                        <img src="Noticia1.png" alt="Parche de seguridad" class="img-fit">
+                        <span class="noticia-badge badge-seguridad" data-i18n="categoriaSeguridad">Seguridad</span>
+                    </div>
+                    <div class="noticia-card-cuerpo">
+                        <p class="noticia-fecha">18 nov 2026</p>
+                        <h3 class="noticia-card-titulo" data-i18n="n1Titulo">
+                            Nuevo sistema antitrampas: resultados de la primera semana
+                        </h3>
+                        <p class="noticia-card-desc" data-i18n="n1Desc">
+                            Más de 12.000 cuentas suspendidas y un 78 % de reducción en reportes por uso de software ilegal.
+                        </p>
+                        <a href="#" class="noticia-card-link" data-i18n="leerMasCorto">Leer más →</a>
+                    </div>
+                </article>
+
+                <article class="noticia-card">
+                    <div class="noticia-card-imagen">
+                        <img src="Noticia3.png" alt="Evento de temporada" class="img-fit">
+                        <span class="noticia-badge badge-evento" data-i18n="categoriaEvento">Evento</span>
+                    </div>
+                    <div class="noticia-card-cuerpo">
+                        <p class="noticia-fecha">15 nov 2026</p>
+                        <h3 class="noticia-card-titulo" data-i18n="n2Titulo">
+                            "Invierno de acero": evento de temporada con recompensas exclusivas
+                        </h3>
+                        <p class="noticia-card-desc" data-i18n="n2Desc">
+                            Completa misiones diarias durante todo diciembre y desbloquea skins navideñas, emblemas y un arma legendaria.
+                        </p>
+                        <a href="#" class="noticia-card-link" data-i18n="leerMasCorto">Leer más →</a>
+                    </div>
+                </article>
+
+                <article class="noticia-card">
+                    <div class="noticia-card-imagen">
+                        <img src="Noticia4.png" alt="Torneo comunitario" class="img-fit">
+                        <span class="noticia-badge badge-comunidad" data-i18n="categoriaComunidad">Comunidad</span>
+                    </div>
+                    <div class="noticia-card-cuerpo">
+                        <p class="noticia-fecha">12 nov 2026</p>
+                        <h3 class="noticia-card-titulo" data-i18n="n3Titulo">
+                            Torneo comunitario A.V.A Masters: inscripciones abiertas
+                        </h3>
+                        <p class="noticia-card-desc" data-i18n="n3Desc">
+                            Premios de hasta 10.000 USD, transmisión oficial en vivo y clasificación directa al campeonato mundial.
+                        </p>
+                        <a href="#" class="noticia-card-link" data-i18n="leerMasCorto">Leer más →</a>
+                    </div>
+                </article>
+
+                <article class="noticia-card">
+                    <div class="noticia-card-imagen">
+                        <img src="Noticia2.png" alt="Nuevo mapa" class="img-fit">
+                        <span class="noticia-badge" data-i18n="categoriaActualizacion">Actualización</span>
+                    </div>
+                    <div class="noticia-card-cuerpo">
+                        <p class="noticia-fecha">8 nov 2026</p>
+                        <h3 class="noticia-card-titulo" data-i18n="n4Titulo">
+                            Primer vistazo al mapa "Puerto Norte"
+                        </h3>
+                        <p class="noticia-card-desc" data-i18n="n4Desc">
+                            Un entorno industrial costero diseñado para partidas 5v5 con múltiples rutas y coberturas dinámicas.
+                        </p>
+                        <a href="#" class="noticia-card-link" data-i18n="leerMasCorto">Leer más →</a>
+                    </div>
+                </article>
+
+                <article class="noticia-card">
+                    <div class="noticia-card-imagen">
+                        <img src="Noticia1.png" alt="Aviso de seguridad" class="img-fit">
+                        <span class="noticia-badge badge-seguridad" data-i18n="categoriaSeguridad">Seguridad</span>
+                    </div>
+                    <div class="noticia-card-cuerpo">
+                        <p class="noticia-fecha">5 nov 2026</p>
+                        <h3 class="noticia-card-titulo" data-i18n="n5Titulo">
+                            Aviso importante: intentos de phishing en correos falsos
+                        </h3>
+                        <p class="noticia-card-desc" data-i18n="n5Desc">
+                            Detectamos campañas fraudulentas que suplantan al equipo oficial. Aprende a identificar los mensajes legítimos.
+                        </p>
+                        <a href="#" class="noticia-card-link" data-i18n="leerMasCorto">Leer más →</a>
+                    </div>
+                </article>
+
+                <article class="noticia-card">
+                    <div class="noticia-card-imagen">
+                        <img src="Noticia3.png" alt="Doble XP" class="img-fit">
+                        <span class="noticia-badge badge-evento" data-i18n="categoriaEvento">Evento</span>
+                    </div>
+                    <div class="noticia-card-cuerpo">
+                        <p class="noticia-fecha">1 nov 2026</p>
+                        <h3 class="noticia-card-titulo" data-i18n="n6Titulo">
+                            Fin de semana de doble experiencia y monedas
+                        </h3>
+                        <p class="noticia-card-desc" data-i18n="n6Desc">
+                            Del 1 al 3 de noviembre, todas las partidas otorgan el doble de XP y créditos en cualquier modo de juego.
+                        </p>
+                        <a href="#" class="noticia-card-link" data-i18n="leerMasCorto">Leer más →</a>
+                    </div>
+                </article>
+
+            </section>
+
+        </main>
+
+        <footer class="footer-principal">
+            <section class="footer-logo-container">
+                <img src="Logo.png" alt="Imagen del logo" class="footer-logo">
+            </section>
+
+            <nav class="nav-footer-links">
+                <a href="#" class="link-footer" data-i18n="terminos">Términos y políticas de privacidad</a>
+                <a href="#" class="link-footer" data-i18n="sobreNosotros">Sobre nosotros</a>
+                <a href="#" class="link-footer" data-i18n="contactanos">Contáctanos</a>
+                <a href="/#ayuda" class="link-footer" data-i18n="ayuda">Ayuda</a>
+            </nav>
+
+            <nav class="nav-footer-redes">
+                <a href="https://www.facebook.com/ava/" class="link-red-social">
+                    <img src="Facebook.png" alt="Logo de Facebook" class="icon-facebook">
+                </a>
+                <a href="https://x.com/avaunei" class="link-red-social">
+                    <img src="X.png" alt="Logo de X (Twitter)" class="icon-x">
+                </a>
+                <a href="https://www.instagram.com/alliance_of_valiant_arms/" class="link-red-social">
+                    <img src="Instagram.png" alt="Logo de Instagram" class="icon-instagram">
+                </a>
+                <a href="https://www.youtube.com/@AVAkzArp" class="link-red-social">
+                    <img src="YouTube.png" alt="Logo de YouTube" class="icon-youtube">
+                </a>
+            </nav>
+
+            <p class="copyright" data-i18n="copyright">
+                &copy; AeriaGames. Alliance of Valiant Arms. Todos los derechos reservados.
+            </p>
+        </footer>
+
+        <div id="alerta-acceso" class="alerta-acceso" style="display:none;">
+            <span id="alerta-texto"></span>
+            <button id="alerta-cerrar" class="alerta-cerrar">&times;</button>
+        </div>
+
+        <script src="idiomas.js"></script>
+    </body>
+</html>

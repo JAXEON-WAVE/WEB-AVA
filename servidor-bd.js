@@ -153,13 +153,56 @@ function responderJSON(res, obj) {
   res.end(JSON.stringify(obj));
 }
 
+function enviarHTMLConDatos(res, nombreArchivo, usuario) {
+  try {
+    let contenido = fs.readFileSync(path.join(__dirname, nombreArchivo), 'utf-8');
+
+    if (usuario) {
+      contenido = contenido.replace(
+        /(<input[^>]*id="Nombre"[^>]*)(>)/i,
+        (match, antes, cierre) => {
+          if (/value\s*=/i.test(antes)) {
+            return match.replace(/value\s*=\s*"[^"]*"/i, `value="${usuario.nombre}"`);
+          }
+          return `${antes} value="${usuario.nombre}"${cierre}`;
+        }
+      );
+
+      contenido = contenido.replace(
+        /(<input[^>]*id="Correo"[^>]*)(>)/i,
+        (match, antes, cierre) => {
+          if (/value\s*=/i.test(antes)) {
+            return match.replace(/value\s*=\s*"[^"]*"/i, `value="${usuario.correo}"`);
+          }
+          return `${antes} value="${usuario.correo}"${cierre}`;
+        }
+      );
+    }
+
+    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+    res.end(contenido);
+  } catch (error) {
+    res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
+    res.end('Error al cargar la pagina.');
+  }
+}
+
 const servidor = http.createServer(async (req, res) => {
 
   const url = new URL(req.url, 'http://localhost:3000');
   const ruta = url.pathname;
 
   if (req.method === 'GET' && ruta === '/') {
-    return enviarHTML(res, 'Wireframe.html');
+    const usuario = obtenerUsuarioActual(req);
+    return enviarHTMLConDatos(res, 'Wireframe.html', usuario);
+  }
+
+  if (req.method === 'GET' && ruta === '/noticias') {
+    return enviarHTML(res, 'Noticias.html');
+  }
+
+  if (req.method === 'GET' && ruta === '/armas') {
+    return enviarHTML(res, 'Armas.html');
   }
 
   if (req.method === 'GET' && ruta === '/dashboard') {
@@ -169,6 +212,10 @@ const servidor = http.createServer(async (req, res) => {
       return res.end();
     }
     return enviarHTML(res, 'Dashboard.html');
+  }
+
+  if (req.method === 'GET' && ruta === '/api/estado') {
+    return responderJSON(res, { ok: true, estado: 'activo' });
   }
 
   if (req.method === 'GET' && ruta === '/api/sesion') {
@@ -315,8 +362,40 @@ const servidor = http.createServer(async (req, res) => {
       res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
       return res.end('404 - Archivo no encontrado');
     }
+
     const extension = path.extname(archivo).toLowerCase();
-    res.writeHead(200, { 'Content-Type': tipos[extension] || 'application/octet-stream' });
+    const tipo = tipos[extension] || 'application/octet-stream';
+    const stat = fs.statSync(archivo);
+    const total = stat.size;
+    const range = req.headers.range;
+
+    if (range) {
+      const match = range.match(/bytes=(\d*)-(\d*)/);
+      let inicio = match && match[1] ? parseInt(match[1], 10) : 0;
+      let fin = match && match[2] ? parseInt(match[2], 10) : total - 1;
+      if (isNaN(inicio) || inicio < 0) inicio = 0;
+      if (isNaN(fin) || fin >= total) fin = total - 1;
+      if (inicio > fin) {
+        res.writeHead(416, { 'Content-Range': 'bytes */' + total });
+        return res.end();
+      }
+      res.writeHead(206, {
+        'Content-Type': tipo,
+        'Content-Length': (fin - inicio + 1),
+        'Content-Range': 'bytes ' + inicio + '-' + fin + '/' + total,
+        'Accept-Ranges': 'bytes',
+        'Cache-Control': 'no-cache'
+      });
+      const stream = fs.createReadStream(archivo, { start: inicio, end: fin });
+      return stream.pipe(res);
+    }
+
+    res.writeHead(200, {
+      'Content-Type': tipo,
+      'Content-Length': total,
+      'Accept-Ranges': 'bytes',
+      'Cache-Control': 'no-cache'
+    });
     return res.end(fs.readFileSync(archivo));
   }
 

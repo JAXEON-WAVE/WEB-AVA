@@ -72,7 +72,7 @@
 <html lang="es">
     <head>
         <meta charset="UTF-8">
-        <title data-i18n="tituloPagina">Videojuego</title>
+        <title data-i18n="tituloPagina">Alliance of Valiant Arms</title>
         <link rel="stylesheet" href="Estilos.css">
     </head>
 
@@ -84,12 +84,13 @@
 
             <nav class="nav-principal">
                 <a href="#inicio" class="btn-nav" data-i18n="inicio">Inicio</a>
+                <a href="/armas" class="btn-nav" data-i18n="armas">Armas</a>
                 <a href="#Plataformas" class="btn-nav" data-i18n="plataformas">Plataformas</a>
                 <a href="#multimedia" class="btn-nav" data-i18n="multimedia">Multimedia</a>
                 <a href="#conoce" class="btn-nav" data-i18n="conoce">Conoce</a>
                 <a href="#noticias" class="btn-nav" data-i18n="noticias">Noticias</a>
                 <a href="#ayuda" class="btn-nav" data-i18n="ayuda">Ayuda</a>
-                <a href="/dashboard" class="btn-nav">Dashboard</a>
+                <a href="/dashboard" class="btn-nav" id="link-dashboard" style="display:none;" data-i18n="dashboard">Dashboard</a>
                 <div class="selector-idioma" role="group" aria-label="Idioma / Language">
                     <button type="button" class="btn-idioma" data-idioma="es" title="Español">ES</button>
                     <button type="button" class="btn-idioma" data-idioma="en" title="English">EN</button>
@@ -137,7 +138,7 @@
 
                 <div class="contenedor-flex-centro">
                     <article class="caja-qr">
-                        <p class="texto-qr">QR</p>
+                        <img src="qr.png" alt="Código QR" class="img-qr">
                     </article>
 
                     <nav class="nav-tabla">
@@ -161,7 +162,7 @@
 
                     <aside class="caja-clasificacion">
                         <p class="texto-clasificacion" data-i18n="clasificacion">
-                            Sección de clasificación de edades
+                            Clasificación por determinar · Violencia fantasiosa · Compras dentro del juego
                         </p>
                     </aside>
                 </div>
@@ -172,23 +173,25 @@
                     Mecánicas básicas del juego
                 </h2>
 
-                <p class="descripcion-seccion" data-i18n="mecanicasDesc">
-                    Descripción de las mecánicas
-                </p>
-
                 <div class="contenedor-flex-centro margen-top-50">
                     <aside class="menu-mecanicas">
                         <nav>
-                            <a href="#" class="btn-mecanica" data-i18n="controles">Controles</a>
-                            <a href="#" class="btn-mecanica" data-i18n="combate">Combate</a>
-                            <a href="#" class="btn-mecanica" data-i18n="estrategia">Estrategia</a>
-                            <a href="#" class="btn-mecanica" data-i18n="progresion">Progresión</a>
+                            <a href="#" class="btn-mecanica activo" data-i18n="trailer" data-video="Trailer.mp4" data-poster="Trailer.png">Tráiler</a>
+                            <a href="#" class="btn-mecanica" data-i18n="controles" data-video="Controles.mp4" data-poster="Controles.png">Controles</a>
+                            <a href="#" class="btn-mecanica" data-i18n="combate" data-video="Combate.mp4" data-poster="Combate.png">Combate</a>
+                            <a href="#" class="btn-mecanica" data-i18n="estrategia" data-video="Estrategia.mp4" data-poster="Estrategia.png">Estrategia</a>
+                            <a href="#" class="btn-mecanica" data-i18n="progresion" data-video="Progresion.mp4" data-poster="Progresion.png">Progresión</a>
                         </nav>
                     </aside>
 
                     <article class="video-mecanicas-container">
-                        <video controls class="video-mecanicas">
-                            <source src="Mecanicas.mp4" type="video/mp4">
+                        <video
+                            controls
+                            preload="metadata"
+                            class="video-mecanicas"
+                            id="video-mecanicas"
+                            poster="Trailer.png">
+                            <source src="Trailer.mp4" type="video/mp4">
                             Tu navegador no soporta el reproductor de video.
                         </video>
                     </article>
@@ -235,28 +238,28 @@
                     <div class="carrusel-noticias-viewport">
                         <div class="carrusel-noticias" id="carrusel-track">
                             <article class="tarjeta-noticia grande" data-indice="0">
-                                <img src="Noticia1.png" alt="Visualización de la noticia 1. Anuncio de seguridad" class="img-fit">
+                                <img src="Noticia1.png" alt="Anuncio de seguridad" class="img-fit">
                             </article>
                             <article class="tarjeta-noticia grande" data-indice="1">
-                                <img src="Noticia2.png" alt="Visualización de la noticia 2. Anuncio de actualización" class="img-fit">
+                                <img src="Noticia2.png" alt="Anuncio de actualización" class="img-fit">
                             </article>
                             <article class="tarjeta-noticia grande" data-indice="2">
-                                <img src="Noticia3.png" alt="Visualización de la noticia 3. Anuncio de seguridad" class="img-fit">
+                                <img src="Noticia3.png" alt="Anuncio de seguridad" class="img-fit">
                             </article>
                             <article class="tarjeta-noticia grande" data-indice="3">
-                                <img src="Noticia4.png" alt="Visualización de la noticia 4. Previsualización de la noticia" class="img-fit">
+                                <img src="Noticia4.png" alt="Previsualización de la noticia" class="img-fit">
                             </article>
                             <article class="tarjeta-noticia grande" data-indice="4">
-                                <img src="Noticia1.png" alt="Visualización de la noticia 1. Anuncio de seguridad" class="img-fit">
+                                <img src="Noticia1.png" alt="Anuncio de seguridad" class="img-fit">
                             </article>
                             <article class="tarjeta-noticia grande" data-indice="5">
-                                <img src="Noticia2.png" alt="Visualización de la noticia 2. Anuncio de actualización" class="img-fit">
+                                <img src="Noticia2.png" alt="Anuncio de actualización" class="img-fit">
                             </article>
                             <article class="tarjeta-noticia grande" data-indice="6">
-                                <img src="Noticia3.png" alt="Visualización de la noticia 3. Anuncio de seguridad" class="img-fit">
+                                <img src="Noticia3.png" alt="Anuncio de seguridad" class="img-fit">
                             </article>
                             <article class="tarjeta-noticia grande" data-indice="7">
-                                <img src="Noticia4.png" alt="Visualización de la noticia 4. Previsualización de la noticia" class="img-fit">
+                                <img src="Noticia4.png" alt="Previsualización de la noticia" class="img-fit">
                             </article>
                         </div>
                     </div>
@@ -264,7 +267,7 @@
                     <button class="btn-flecha" id="btn-next" aria-label="Siguiente">▶</button>
                 </div>
 
-                <a href="#" class="btn-todas-noticias" data-i18n="verNoticias">
+                <a href="/noticias" class="btn-todas-noticias" data-i18n="verNoticias">
                     Ver todas las noticias
                 </a>
             </section>
@@ -275,7 +278,7 @@
                 </h2>
 
                 <div id="aviso-login" class="aviso-login" style="display:none;">
-                    <p data-i18n="avisoLogin">Debes iniciar sesión para enviar tu solicitud de ayuda.</p>
+                    <p data-i18n="avisoLogin">Inicia sesión para enviar tu solicitud de soporte técnico. Nuestro equipo revisará tu caso y te responderá a la brevedad.</p>
                     <button class="btn-hero" id="btn-login-ayuda" data-i18n="loginRegistro">Iniciar sesión / Registrarme</button>
                 </div>
 
@@ -297,7 +300,7 @@
                     <label for="Descripcion" class="form-label" data-i18n="lblDescProblema">Descripción del problema:</label><br>
                     <textarea id="Descripcion" name="Descripcion" rows="5" class="form-input"></textarea><br><br>
 
-                    <button type="submit" class="btn-submit" data-i18n="enviar">Enviar</button>
+                    <button type="submit" class="btn-submit" data-i18n="enviarSolicitud">Enviar solicitud</button>
                 </form>
             </section>
         </main>
@@ -331,7 +334,6 @@
 
             <p class="copyright" data-i18n="copyright">
                 &copy; AeriaGames. Alliance of Valiant Arms. Todos los derechos reservados.
-                Fanpage hecha por: Juan Diego romero, Santiago Barrera y Andres Carvajal
             </p>
         </footer>
 
@@ -387,6 +389,7 @@
         </div>
 
         <script src="carrusel.js"></script>
+        <script src="mecanicas.js"></script>
         <script src="idiomas.js"></script>
     </body>
 </html>

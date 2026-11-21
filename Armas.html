@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title data-i18n="armasPaginaTitulo">Armas y clases - A.V.A</title>
+        <link rel="stylesheet" href="Estilos.css">
+    </head>
+
+    <body>
+        <header class="header-principal">
+            <section class="logo-container">
+                <img src="Logo.png" alt="Imagen del logo">
+            </section>
+
+            <nav class="nav-principal">
+                <a href="/" class="btn-nav" data-i18n="inicio">Inicio</a>
+                <a href="/armas" class="btn-nav activo" data-i18n="armas">Armas</a>
+                <a href="/#Plataformas" class="btn-nav" data-i18n="plataformas">Plataformas</a>
+                <a href="/#multimedia" class="btn-nav" data-i18n="multimedia">Multimedia</a>
+                <a href="#conoce" class="btn-nav" data-i18n="conoce">Conoce</a>
+                <a href="/noticias" class="btn-nav" data-i18n="noticias">Noticias</a>
+                <a href="/#ayuda" class="btn-nav" data-i18n="ayuda">Ayuda</a>
+                <a href="/dashboard" class="btn-nav" id="link-dashboard" style="display:none;">Dashboard</a>
+                <div class="selector-idioma" role="group" aria-label="Idioma / Language">
+                    <button type="button" class="btn-idioma" data-idioma="es" title="Español">ES</button>
+                    <button type="button" class="btn-idioma" data-idioma="en" title="English">EN</button>
+                </div>
+            </nav>
+
+            <a href="#" class="btn-login" id="btn-login" data-i18n="login">Iniciar sesión</a>
+            <div id="user-info" class="user-info" style="display:none;">
+                <span id="user-nombre"></span>
+                <span id="user-rol" class="badge-rol"></span>
+                <a href="#" id="btn-logout" class="btn-logout" data-i18n="logout">Cerrar sesión</a>
+            </div>
+        </header>
+
+        <div id="modal-login" class="modal-overlay" style="display:none;">
+            <div class="modal-box">
+                <button class="modal-cerrar" data-cerrar>&times;</button>
+                <h3 class="modal-titulo" data-i18n="login">Iniciar sesión</h3>
+
+                <form id="form-login" class="modal-form">
+                    <label class="form-label" data-i18n="lblCorreo">Correo:</label>
+                    <input type="email" name="correo" class="form-input" required>
+
+                    <label class="form-label" data-i18n="lblPassword">Contraseña:</label>
+                    <input type="password" name="password" class="form-input" required>
+
+                    <p id="login-error" class="modal-error"></p>
+
+                    <button type="submit" class="btn-submit" data-i18n="entrar">Entrar</button>
+                </form>
+
+                <p class="modal-cambiar">
+                    <span data-i18n="sinCuenta">¿No tienes cuenta?</span>
+                    <a href="#" id="ir-a-registro" data-i18n="registrateAqui">Regístrate aquí</a>
+                </p>
+            </div>
+        </div>
+
+        <div id="modal-registro" class="modal-overlay" style="display:none;">
+            <div class="modal-box">
+                <button class="modal-cerrar" data-cerrar>&times;</button>
+                <h3 class="modal-titulo" data-i18n="crearCuenta">Crear cuenta</h3>
+
+                <form id="form-registro" class="modal-form">
+                    <label class="form-label" data-i18n="lblNombre">Nombre:</label>
+                    <input type="text" name="nombre" class="form-input" required>
+
+                    <label class="form-label" data-i18n="lblCorreo">Correo:</label>
+                    <input type="email" name="correo" class="form-input" required>
+
+                    <label class="form-label" data-i18n="lblPasswordMin">Contraseña (mín. 6 caracteres):</label>
+                    <input type="password" name="password" class="form-input" required minlength="6">
+
+                    <p id="registro-error" class="modal-error"></p>
+
+                    <button type="submit" class="btn-submit" data-i18n="registrarme">Registrarme</button>
+                </form>
+
+                <p class="modal-cambiar">
+                    <span data-i18n="yaCuenta">¿Ya tienes cuenta?</span>
+                    <a href="#" id="ir-a-login" data-i18n="iniciaSesion">Inicia sesión</a>
+                </p>
+            </div>
+        </div>
+
+        <section class="armas-hero">
+            <video autoplay loop muted playsinline class="hero-video">
+                <source src="Cinematica.mp4" type="video/mp4">
+            </video>
+            <h1 class="hero-titulo" data-i18n="armasPaginaTitulo">Armas y clases</h1>
+            <p class="hero-descripcion" data-i18n="armasPaginaDesc">
+                Conoce las tres clases de combate de Alliance of Valiant Arms y el arsenal disponible para cada una.
+            </p>
+        </section>
+
+        <main class="armas-main">
+
+            <div class="armas-tabs" role="tablist">
+                <button class="btn-filtro activo" data-clase="pointman" data-i18n="clasePointman">Point Man</button>
+                <button class="btn-filtro" data-clase="rifleman" data-i18n="claseRifleman">Rifle Man</button>
+                <button class="btn-filtro" data-clase="sniper" data-i18n="claseSniper">Sniper</button>
+            </div>
+
+            <section class="clase-panel activo" data-panel="pointman">
+                <div class="clase-info">
+                    <span class="clase-etiqueta" data-i18n="etiquetaAsalto">Asalto</span>
+                    <h2 class="clase-titulo" data-i18n="clasePointman">Point Man</h2>
+                    <p class="clase-desc" data-i18n="pointmanDesc">
+                        Especialista en combate a corta distancia. Rápido, agresivo y letal en interiores. Su función es abrir brecha, presionar al enemigo y controlar los puntos de captura.
+                    </p>
+                    <ul class="clase-stats">
+                        <li><strong data-i18n="statMovilidad">Movilidad:</strong> <span class="barra"><span style="width: 95%"></span></span></li>
+                        <li><strong data-i18n="statCadencia">Cadencia:</strong> <span class="barra"><span style="width: 90%"></span></span></li>
+                        <li><strong data-i18n="statPrecision">Precisión:</strong> <span class="barra"><span style="width: 50%"></span></span></li>
+                        <li><strong data-i18n="statAlcance">Alcance:</strong> <span class="barra"><span style="width: 35%"></span></span></li>
+                    </ul>
+                </div>
+
+                <div class="armas-grid">
+                    <article class="arma-card">
+                        <div class="arma-imagen">
+                            <span class="arma-tipo" data-i18n="tipoSMG">Subfusil</span>
+                        </div>
+                        <div class="arma-cuerpo">
+                            <h3 class="arma-nombre">MP5A3</h3>
+                            <p class="arma-desc" data-i18n="mp5Desc">Subfusil versátil, controlable y con buen daño en corto alcance.</p>
+                            <ul class="arma-specs">
+                                <li><span data-i18n="specDano">Daño</span><strong>28</strong></li>
+                                <li><span data-i18n="specCadencia">Cadencia</span><strong>850</strong></li>
+                                <li><span data-i18n="specPrecision">Precisión</span><strong>62</strong></li>
+                                <li><span data-i18n="specCargador">Cargador</span><strong>30</strong></li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="arma-card">
+                        <div class="arma-imagen">
+                            <span class="arma-tipo" data-i18n="tipoSMG">Subfusil</span>
+                        </div>
+                        <div class="arma-cuerpo">
+                            <h3 class="arma-nombre">P90</h3>
+                            <p class="arma-desc" data-i18n="p90Desc">Alta cadencia y cargador de 50 balas, ideal para presión constante.</p>
+                            <ul class="arma-specs">
+                                <li><span data-i18n="specDano">Daño</span><strong>24</strong></li>
+                                <li><span data-i18n="specCadencia">Cadencia</span><strong>900</strong></li>
+                                <li><span data-i18n="specPrecision">Precisión</span><strong>58</strong></li>
+                                <li><span data-i18n="specCargador">Cargador</span><strong>50</strong></li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="arma-card">
+                        <div class="arma-imagen">
+                            <span class="arma-tipo" data-i18n="tipoEscopeta">Escopeta</span>
+                        </div>
+                        <div class="arma-cuerpo">
+                            <h3 class="arma-nombre">SPAS-12</h3>
+                            <p class="arma-desc" data-i18n="spasDesc">Devastadora a corta distancia, letal en pasillos y esquinas.</p>
+                            <ul class="arma-specs">
+                                <li><span data-i18n="specDano">Daño</span><strong>85</strong></li>
+                                <li><span data-i18n="specCadencia">Cadencia</span><strong>120</strong></li>
+                                <li><span data-i18n="specPrecision">Precisión</span><strong>30</strong></li>
+                                <li><span data-i18n="specCargador">Cargador</span><strong>8</strong></li>
+                            </ul>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section class="clase-panel" data-panel="rifleman">
+                <div class="clase-info">
+                    <span class="clase-etiqueta" data-i18n="etiquetaTactico">Táctico</span>
+                    <h2 class="clase-titulo" data-i18n="claseRifleman">Rifle Man</h2>
+                    <p class="clase-desc" data-i18n="riflemanDesc">
+                        El equilibrio perfecto entre potencia y control. Controla media distancia con ráfagas precisas y gran capacidad de fuego sostenido.
+                    </p>
+                    <ul class="clase-stats">
+                        <li><strong data-i18n="statMovilidad">Movilidad:</strong> <span class="barra"><span style="width: 70%"></span></span></li>
+                        <li><strong data-i18n="statCadencia">Cadencia:</strong> <span class="barra"><span style="width: 75%"></span></span></li>
+                        <li><strong data-i18n="statPrecision">Precisión:</strong> <span class="barra"><span style="width: 80%"></span></span></li>
+                        <li><strong data-i18n="statAlcance">Alcance:</strong> <span class="barra"><span style="width: 70%"></span></span></li>
+                    </ul>
+                </div>
+
+                <div class="armas-grid">
+                    <article class="arma-card">
+                        <div class="arma-imagen">
+                            <span class="arma-tipo" data-i18n="tipoFusil">Fusil de asalto</span>
+                        </div>
+                        <div class="arma-cuerpo">
+                            <h3 class="arma-nombre">AK-47</h3>
+                            <p class="arma-desc" data-i18n="akDesc">Alto daño por disparo, requiere control de retroceso para dominarla.</p>
+                            <ul class="arma-specs">
+                                <li><span data-i18n="specDano">Daño</span><strong>42</strong></li>
+                                <li><span data-i18n="specCadencia">Cadencia</span><strong>600</strong></li>
+                                <li><span data-i18n="specPrecision">Precisión</span><strong>70</strong></li>
+                                <li><span data-i18n="specCargador">Cargador</span><strong>30</strong></li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="arma-card">
+                        <div class="arma-imagen">
+                            <span class="arma-tipo" data-i18n="tipoFusil">Fusil de asalto</span>
+                        </div>
+                        <div class="arma-cuerpo">
+                            <h3 class="arma-nombre">M4A1</h3>
+                            <p class="arma-desc" data-i18n="m4Desc">Precisión superior, retroceso controlado y versatilidad total.</p>
+                            <ul class="arma-specs">
+                                <li><span data-i18n="specDano">Daño</span><strong>35</strong></li>
+                                <li><span data-i18n="specCadencia">Cadencia</span><strong>700</strong></li>
+                                <li><span data-i18n="specPrecision">Precisión</span><strong>82</strong></li>
+                                <li><span data-i18n="specCargador">Cargador</span><strong>30</strong></li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="arma-card">
+                        <div class="arma-imagen">
+                            <span class="arma-tipo" data-i18n="tipoAmetralladora">Ametralladora</span>
+                        </div>
+                        <div class="arma-cuerpo">
+                            <h3 class="arma-nombre">M249</h3>
+                            <p class="arma-desc" data-i18n="m249Desc">Fuego sostenido y supresión. Perfecta para cubrir objetivos.</p>
+                            <ul class="arma-specs">
+                                <li><span data-i18n="specDano">Daño</span><strong>38</strong></li>
+                                <li><span data-i18n="specCadencia">Cadencia</span><strong>800</strong></li>
+                                <li><span data-i18n="specPrecision">Precisión</span><strong>55</strong></li>
+                                <li><span data-i18n="specCargador">Cargador</span><strong>100</strong></li>
+                            </ul>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section class="clase-panel" data-panel="sniper">
+                <div class="clase-info">
+                    <span class="clase-etiqueta" data-i18n="etiquetaFrancotirador">Francotirador</span>
+                    <h2 class="clase-titulo" data-i18n="claseSniper">Sniper</h2>
+                    <p class="clase-desc" data-i18n="sniperDesc">
+                        Precisión letal a larga distancia. Su función es eliminar objetivos clave, cubrir líneas de visión y controlar el flujo del combate desde la distancia.
+                    </p>
+                    <ul class="clase-stats">
+                        <li><strong data-i18n="statMovilidad">Movilidad:</strong> <span class="barra"><span style="width: 40%"></span></span></li>
+                        <li><strong data-i18n="statCadencia">Cadencia:</strong> <span class="barra"><span style="width: 30%"></span></span></li>
+                        <li><strong data-i18n="statPrecision">Precisión:</strong> <span class="barra"><span style="width: 100%"></span></span></li>
+                        <li><strong data-i18n="statAlcance">Alcance:</strong> <span class="barra"><span style="width: 100%"></span></span></li>
+                    </ul>
+                </div>
+
+                <div class="armas-grid">
+                    <article class="arma-card">
+                        <div class="arma-imagen">
+                            <span class="arma-tipo" data-i18n="tipoFrancotirador">Francotirador</span>
+                        </div>
+                        <div class="arma-cuerpo">
+                            <h3 class="arma-nombre">AWM</h3>
+                            <p class="arma-desc" data-i18n="awmDesc">Daño de un solo disparo. El arma de referencia para los francotiradores.</p>
+                            <ul class="arma-specs">
+                                <li><span data-i18n="specDano">Daño</span><strong>100</strong></li>
+                                <li><span data-i18n="specCadencia">Cadencia</span><strong>40</strong></li>
+                                <li><span data-i18n="specPrecision">Precisión</span><strong>98</strong></li>
+                                <li><span data-i18n="specCargador">Cargador</span><strong>5</strong></li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="arma-card">
+                        <div class="arma-imagen">
+                            <span class="arma-tipo" data-i18n="tipoFrancotirador">Francotirador</span>
+                        </div>
+                        <div class="arma-cuerpo">
+                            <h3 class="arma-nombre">M24</h3>
+                            <p class="arma-desc" data-i18n="m24Desc">Ligero y ágil. Excelente para posiciones rápidas y cambios de objetivo.</p>
+                            <ul class="arma-specs">
+                                <li><span data-i18n="specDano">Daño</span><strong>90</strong></li>
+                                <li><span data-i18n="specCadencia">Cadencia</span><strong>50</strong></li>
+                                <li><span data-i18n="specPrecision">Precisión</span><strong>95</strong></li>
+                                <li><span data-i18n="specCargador">Cargador</span><strong>5</strong></li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="arma-card">
+                        <div class="arma-imagen">
+                            <span class="arma-tipo" data-i18n="tipoSemiauto">Semiautomático</span>
+                        </div>
+                        <div class="arma-cuerpo">
+                            <h3 class="arma-nombre">SVD</h3>
+                            <p class="arma-desc" data-i18n="svdDesc">Disparos rápidos y precisos. Menos daño pero mayor control de zona.</p>
+                            <ul class="arma-specs">
+                                <li><span data-i18n="specDano">Daño</span><strong>75</strong></li>
+                                <li><span data-i18n="specCadencia">Cadencia</span><strong>120</strong></li>
+                                <li><span data-i18n="specPrecision">Precisión</span><strong>90</strong></li>
+                                <li><span data-i18n="specCargador">Cargador</span><strong>10</strong></li>
+                            </ul>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="footer-principal">
+            <section class="footer-logo-container">
+                <img src="Logo.png" alt="Imagen del logo" class="footer-logo">
+            </section>
+
+            <nav class="nav-footer-links">
+                <a href="#" class="link-footer" data-i18n="terminos">Términos y políticas de privacidad</a>
+                <a href="#" class="link-footer" data-i18n="sobreNosotros">Sobre nosotros</a>
+                <a href="#" class="link-footer" data-i18n="contactanos">Contáctanos</a>
+                <a href="/#ayuda" class="link-footer" data-i18n="ayuda">Ayuda</a>
+            </nav>
+
+            <nav class="nav-footer-redes">
+                <a href="https://www.facebook.com/ava/" class="link-red-social">
+                    <img src="Facebook.png" alt="Logo de Facebook" class="icon-facebook">
+                </a>
+                <a href="https://x.com/avaunei" class="link-red-social">
+                    <img src="X.png" alt="Logo de X (Twitter)" class="icon-x">
+                </a>
+                <a href="https://www.instagram.com/alliance_of_valiant_arms/" class="link-red-social">
+                    <img src="Instagram.png" alt="Logo de Instagram" class="icon-instagram">
+                </a>
+                <a href="https://www.youtube.com/@AVAkzArp" class="link-red-social">
+                    <img src="YouTube.png" alt="Logo de YouTube" class="icon-youtube">
+                </a>
+            </nav>
+
+            <p class="copyright" data-i18n="copyright">
+                &copy; AeriaGames. Alliance of Valiant Arms. Todos los derechos reservados.
+            </p>
+        </footer>
+
+        <div id="alerta-acceso" class="alerta-acceso" style="display:none;">
+            <span id="alerta-texto"></span>
+            <button id="alerta-cerrar" class="alerta-cerrar">&times;</button>
+        </div>
+
+        <script src="idiomas.js"></script>
+        <script src="armas.js"></script>
+    </body>
+</html>

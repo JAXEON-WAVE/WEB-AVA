@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title data-i18n="dashboardTitulo">Dashboard A.V.A</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="Estilos.css">
 </head>
@@ -12,56 +12,84 @@
 <body>
 
     <header class="header-principal">
-        <section class="logo-container"><img src="Logo.png" class="dashboard-logo"></section>
-        <nav class="nav-principal"><a href="/" class="btn-nav" data-i18n="inicio">Inicio</a> <div class="selector-idioma" role="group" aria-label="Idioma / Language"><button type="button" class="btn-idioma" data-idioma="es" title="Español">ES</button><button type="button" class="btn-idioma" data-idioma="en" title="English">EN</button></div></nav>
-        <h1 class="dashboard-marca">Dashboard A.V.A</h1>
+        <section class="logo-container"><img src="Logo.png" class="dashboard-logo" alt="Logo A.V.A"></section>
+        <nav class="nav-principal">
+            <a href="/" class="btn-nav" data-i18n="inicio">Inicio</a>
+            <a href="/armas" class="btn-nav" data-i18n="armas">Armas</a>
+            <a href="/#Plataformas" class="btn-nav" data-i18n="plataformas">Plataformas</a>
+            <a href="/#multimedia" class="btn-nav" data-i18n="multimedia">Multimedia</a>
+            <a href="/#conoce" class="btn-nav" data-i18n="conoce">Conoce</a>
+            <a href="/noticias" class="btn-nav" data-i18n="noticias">Noticias</a>
+            <a href="/#ayuda" class="btn-nav" data-i18n="ayuda">Ayuda</a>
+            <div class="selector-idioma" role="group" aria-label="Idioma / Language">
+                <button type="button" class="btn-idioma" data-idioma="es" title="Español">ES</button>
+                <button type="button" class="btn-idioma" data-idioma="en" title="English">EN</button>
+            </div>
+        </nav>
+        <h1 class="dashboard-marca" data-i18n="dashboardTitulo">Dashboard A.V.A</h1>
     </header>
 
     <div id="app">
-        <main class="container dashboard-main">
-            <h2 class="dashboard-subtitulo" data-i18n="panelControl">Panel de Control</h2>
+        <section class="dashboard-hero">
+            <video autoplay loop muted playsinline class="hero-video">
+                <source src="Cinematica.mp4" type="video/mp4">
+            </video>
+            <h1 class="hero-titulo" data-i18n="dashboardHeroTitulo">Panel de Control</h1>
+            <p class="hero-descripcion" data-i18n="dashboardHeroDesc">
+                Administra las solicitudes de soporte, revisa los usuarios registrados y analiza el estado del servidor en tiempo real.
+            </p>
+        </section>
 
-            <div class="row text-center mb-4">
-                <div class="col-md-4 mb-3">
-                    <div class="dashboard-panel p-3">
-                        <h5 class="dashboard-panel-titulo" data-i18n="totalSolicitudes">Total Solicitudes</h5>
-                        <h2 style="color:#f87171;font-weight:bold;">{{ registros.length }}</h2>
+        <main class="container dashboard-main">
+
+            <div class="row g-3 mb-4">
+                <div class="col-md-4">
+                    <div class="dashboard-card">
+                        <span class="dashboard-card-icono">📨</span>
+                        <h5 class="dashboard-card-titulo" data-i18n="totalSolicitudes">Total Solicitudes</h5>
+                        <h2 class="dashboard-card-valor">{{ registros.length }}</h2>
                     </div>
                 </div>
-                <div class="col-md-4 mb-3">
-                    <div class="dashboard-panel p-3">
-                        <h5 class="dashboard-panel-titulo" data-i18n="problemaComun">Problema más común</h5>
-                        <h4 style="color:#e2e8f0;font-weight:bold;">{{ problemaComun }}</h4>
+                <div class="col-md-4">
+                    <div class="dashboard-card">
+                        <span class="dashboard-card-icono">🔥</span>
+                        <h5 class="dashboard-card-titulo" data-i18n="problemaComun">Problema más común</h5>
+                        <h4 class="dashboard-card-valor texto-medio">{{ problemaComun }}</h4>
                     </div>
                 </div>
-                <div class="col-md-4 mb-3">
-                    <div class="dashboard-panel p-3">
-                        <h5 class="dashboard-panel-titulo" data-i18n="servidor">Servidor</h5>
-                        <h4 style="color:#22c55e;font-weight:bold;" data-i18n="servidorActivo">🟢 Activo</h4>
+                <div class="col-md-4">
+                    <div class="dashboard-card" :class="claseServidor">
+                        <span class="dashboard-card-icono">{{ iconoServidor }}</span>
+                        <h5 class="dashboard-card-titulo" data-i18n="servidor">Servidor</h5>
+                        <h4 class="dashboard-card-valor" :class="claseTextoServidor">{{ textoServidor }}</h4>
                     </div>
                 </div>
             </div>
 
             <section class="dashboard-panel">
                 <h3 class="dashboard-panel-titulo" data-i18n="solicitudesTipo">Solicitudes por tipo</h3>
-                <canvas ref="canvasGrafico"></canvas>
+                <div class="grafico-wrapper">
+                    <canvas ref="canvasGrafico"></canvas>
+                </div>
             </section>
 
             <section class="dashboard-panel">
-                <h3 class="dashboard-panel-titulo mb-3" data-i18n="registros">Registros</h3>
+                <h3 class="dashboard-panel-titulo" data-i18n="solicitudesSoporte">Registros de soporte</h3>
                 <div class="row mb-3 g-2">
-                    <div class="col-md-8"><input v-model="busqueda" class="form-input m-0" placeholder="🔍 Buscar..." data-i18n-placeholder="buscar"></div>
+                    <div class="col-md-8">
+                        <input v-model="busqueda" class="form-input m-0" data-i18n-placeholder="buscarRegistros" placeholder="🔍 Buscar por nombre, correo o descripción...">
+                    </div>
                     <div class="col-md-4">
                         <select v-model="filtroCategoria" class="form-select m-0">
-              <option value="" data-i18n="filtrar">Filtrar...</option>
-              <option value="cuenta" data-i18n="cuenta">Cuenta</option>
-              <option value="juego" data-i18n="juego">Juego</option>
-              <option value="conexion" data-i18n="conexion">Conexión</option>
-              <option value="otro" data-i18n="otro">Otro</option>
-            </select>
+                            <option value="" data-i18n="todasCategorias">Todas las categorías</option>
+                            <option value="cuenta" data-i18n="cuenta">Cuenta</option>
+                            <option value="juego" data-i18n="juego">Juego</option>
+                            <option value="conexion" data-i18n="conexion">Conexión</option>
+                            <option value="otro" data-i18n="otro">Otro</option>
+                        </select>
                     </div>
                 </div>
-                <p style="color:#e2e8f0;font-size:13px;">{{ t('mostrando') }} {{ filtrados.length }} {{ t('de') }} {{ registros.length }}</p>
+                <p class="dashboard-contador" v-html="textoMostrandoRegistros"></p>
                 <div class="table-responsive">
                     <table id="tabla-registros" class="table table-striped table-hover">
                         <thead>
@@ -75,14 +103,60 @@
                         </thead>
                         <tbody>
                             <tr v-if="!filtrados.length">
-                                <td colspan="5" class="text-center py-4">{{ t('sinResultados') }}</td>
+                                <td colspan="5" class="text-center py-4" data-i18n="sinResultados">Sin resultados</td>
                             </tr>
                             <tr v-for="(r,i) in filtrados" :key="i">
                                 <td>{{ r.nombre }}</td>
                                 <td>{{ r.correo }}</td>
-                                <td>{{ r.problema }}</td>
+                                <td><span class="badge-tipo">{{ r.problema }}</span></td>
                                 <td>{{ r.descripcion }}</td>
                                 <td>{{ r.fecha }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="dashboard-panel">
+                <h3 class="dashboard-panel-titulo" data-i18n="usuariosRegistrados">Usuarios registrados</h3>
+                <div class="row mb-3 g-2">
+                    <div class="col-md-8">
+                        <input v-model="busquedaUsuarios" class="form-input m-0" data-i18n-placeholder="buscarUsuarios" placeholder="🔍 Buscar por nombre, correo o rol...">
+                    </div>
+                    <div class="col-md-4">
+                        <select v-model="filtroRol" class="form-select m-0">
+                            <option value="" data-i18n="todosRoles">Todos los roles</option>
+                            <option value="administrador" data-i18n="administrador">Administrador</option>
+                            <option value="usuario" data-i18n="usuario">Usuario</option>
+                        </select>
+                    </div>
+                </div>
+                <p class="dashboard-contador" v-html="textoMostrandoUsuarios"></p>
+                <div class="table-responsive">
+                    <table id="tabla-usuarios" class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th data-i18n="thId">ID</th>
+                                <th data-i18n="thNombre">Nombre</th>
+                                <th data-i18n="thCorreo">Correo</th>
+                                <th data-i18n="thRol">Rol</th>
+                                <th data-i18n="thFechaRegistro">Fecha registro</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-if="!usuariosFiltrados.length">
+                                <td colspan="5" class="text-center py-4" data-i18n="sinUsuarios">Sin usuarios</td>
+                            </tr>
+                            <tr v-for="u in usuariosFiltrados" :key="u.id">
+                                <td>{{ u.id }}</td>
+                                <td>{{ u.nombre }}</td>
+                                <td>{{ u.correo }}</td>
+                                <td>
+                                    <span :class="u.rol === 'administrador' ? 'badge-admin' : 'badge-user'" class="badge-rol">
+                                        {{ u.rol.toUpperCase() }}
+                                    </span>
+                                </td>
+                                <td>{{ new Date(u.fecha_registro).toLocaleString('es-CO') }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -92,9 +166,41 @@
     </div>
 
     <footer class="footer-principal">
-        <section class="footer-logo-container"><img src="Logo.png" class="footer-logo"></section>
-        <p class="copyright">&copy; AeriaGames</p>
+        <section class="footer-logo-container">
+            <img src="Logo.png" alt="Imagen del logo" class="footer-logo">
+        </section>
+
+        <nav class="nav-footer-links">
+            <a href="#" class="link-footer" data-i18n="terminos">Términos y políticas de privacidad</a>
+            <a href="#" class="link-footer" data-i18n="sobreNosotros">Sobre nosotros</a>
+            <a href="#" class="link-footer" data-i18n="contactanos">Contáctanos</a>
+            <a href="/#ayuda" class="link-footer" data-i18n="ayuda">Ayuda</a>
+        </nav>
+
+        <nav class="nav-footer-redes">
+            <a href="https://www.facebook.com/ava/" class="link-red-social">
+                <img src="Facebook.png" alt="Logo de Facebook" class="icon-facebook">
+            </a>
+            <a href="https://x.com/avaunei" class="link-red-social">
+                <img src="X.png" alt="Logo de X (Twitter)" class="icon-x">
+            </a>
+            <a href="https://www.instagram.com/alliance_of_valiant_arms/" class="link-red-social">
+                <img src="Instagram.png" alt="Logo de Instagram" class="icon-instagram">
+            </a>
+            <a href="https://www.youtube.com/@AVAkzArp" class="link-red-social">
+                <img src="YouTube.png" alt="Logo de YouTube" class="icon-youtube">
+            </a>
+        </nav>
+
+        <p class="copyright" data-i18n="copyright">
+            &copy; AeriaGames. Alliance of Valiant Arms. Todos los derechos reservados.
+        </p>
     </footer>
+
+    <div id="alerta-acceso" class="alerta-acceso" style="display:none;">
+        <span id="alerta-texto"></span>
+        <button id="alerta-cerrar" class="alerta-cerrar">&times;</button>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -106,23 +212,23 @@
             computed,
             watch,
             onMounted,
+            onUnmounted,
             nextTick
         } = Vue;
 
         createApp({
             setup() {
                 const registros = ref([]),
+                    usuarios = ref([]),
                     busqueda = ref(''),
                     filtroCategoria = ref(''),
-                    canvasGrafico = ref(null);
+                    busquedaUsuarios = ref(''),
+                    filtroRol = ref(''),
+                    canvasGrafico = ref(null),
+                    idioma = ref(idiomaActual),
+                    servidorActivo = ref(null);
                 let grafico = null;
-
-                const lang = ref(idiomaActual);
-                const tt = k => { lang.value; return t(k); };
-                document.addEventListener('idioma-cambiado', e => {
-                    lang.value = e.detail;
-                    nextTick(renderGrafico);
-                });
+                let intervaloEstado = null;
 
                 const norm = r => ({
                     nombre: r.Nombre || r.nombre || '-',
@@ -133,6 +239,43 @@
                     raw: (r.Problema || r.problema || r.Clase || r.clase || '').toLowerCase()
                 });
 
+                const iconoServidor = computed(() => {
+                    if (servidorActivo.value === true) return '🟢';
+                    if (servidorActivo.value === false) return '🔴';
+                    return '🟡';
+                });
+
+                const textoServidor = computed(() => {
+                    if (servidorActivo.value === true) return t('servidorActivoReal');
+                    if (servidorActivo.value === false) return t('servidorInactivo');
+                    return t('servidorComprobando');
+                });
+
+                const claseServidor = computed(() => ({
+                    'servidor-ok': servidorActivo.value === true,
+                    'servidor-error': servidorActivo.value === false,
+                    'servidor-check': servidorActivo.value === null
+                }));
+
+                const claseTextoServidor = computed(() => {
+                    if (servidorActivo.value === true) return 'texto-verde';
+                    if (servidorActivo.value === false) return 'texto-rojo';
+                    return 'texto-amarillo';
+                });
+
+                const consultarEstadoServidor = async () => {
+                    try {
+                        const resp = await fetch('/api/estado', {
+                            credentials: 'same-origin',
+                            cache: 'no-store'
+                        });
+                        const data = await resp.json();
+                        servidorActivo.value = !!data.ok;
+                    } catch (e) {
+                        servidorActivo.value = false;
+                    }
+                };
+
                 const filtrados = computed(() => {
                     const t = busqueda.value.toLowerCase(),
                         c = filtroCategoria.value.toLowerCase();
@@ -140,6 +283,19 @@
                         (r.nombre.toLowerCase().includes(t) || r.correo.toLowerCase().includes(t) || r.descripcion.toLowerCase().includes(t)) &&
                         (!c || r.raw === c)
                     );
+                });
+
+                const usuariosFiltrados = computed(() => {
+                    const t = busquedaUsuarios.value.toLowerCase(),
+                        r = filtroRol.value.toLowerCase();
+                    return usuarios.value.filter(u => {
+                        const coincideTexto = !t ||
+                            (u.nombre || '').toLowerCase().includes(t) ||
+                            (u.correo || '').toLowerCase().includes(t) ||
+                            (u.rol || '').toLowerCase().includes(t);
+                        const coincideRol = !r || (u.rol || '').toLowerCase() === r;
+                        return coincideTexto && coincideRol;
+                    });
                 });
 
                 const conteoPorProblema = computed(() => {
@@ -155,6 +311,20 @@
                     return e.length ? e.reduce((a, b) => b[1] > a[1] ? b : a)[0] : '-';
                 });
 
+                const textoMostrandoRegistros = computed(() => {
+                    const plantilla = t('mostrandoRegistros');
+                    return plantilla
+                        .replace('{a}', `<strong>${filtrados.value.length}</strong>`)
+                        .replace('{b}', `<strong>${registros.value.length}</strong>`);
+                });
+
+                const textoMostrandoUsuarios = computed(() => {
+                    const plantilla = t('mostrandoUsuarios');
+                    return plantilla
+                        .replace('{a}', `<strong>${usuariosFiltrados.value.length}</strong>`)
+                        .replace('{b}', `<strong>${usuarios.value.length}</strong>`);
+                });
+
                 const renderGrafico = () => {
                     if (!canvasGrafico.value) return;
                     if (grafico) grafico.destroy();
@@ -163,16 +333,17 @@
                         data: {
                             labels: Object.keys(conteoPorProblema.value),
                             datasets: [{
-                                label: tt('solicitudes'),
+                                label: t('solicitudes'),
                                 data: Object.values(conteoPorProblema.value),
-                                backgroundColor: 'rgba(185,28,28,0.35)',
-                                borderColor: '#b91c1c',
+                                backgroundColor: 'rgba(185,28,28,0.45)',
+                                borderColor: '#f87171',
                                 borderWidth: 2,
-                                borderRadius: 4
+                                borderRadius: 6
                             }]
                         },
                         options: {
                             responsive: true,
+                            maintainAspectRatio: false,
                             plugins: {
                                 legend: {
                                     labels: {
@@ -182,15 +353,13 @@
                             },
                             scales: {
                                 x: {
-                                    grid: {
-                                        display: false
-                                    }
+                                    grid: { display: false },
+                                    ticks: { color: '#94a3b8' }
                                 },
                                 y: {
                                     beginAtZero: true,
-                                    ticks: {
-                                        stepSize: 1
-                                    }
+                                    ticks: { stepSize: 1, color: '#94a3b8' },
+                                    grid: { color: '#1f2937' }
                                 }
                             }
                         }
@@ -199,30 +368,69 @@
 
                 watch(conteoPorProblema, () => nextTick(renderGrafico));
 
-                onMounted(async() => {
+                const actualizarTraduccionesDashboard = () => {
+                    idioma.value = idiomaActual;
+                    nextTick(renderGrafico);
+                };
+
+                window.actualizarTraduccionesDashboard = actualizarTraduccionesDashboard;
+
+                onMounted(async () => {
+                    consultarEstadoServidor();
+                    intervaloEstado = setInterval(consultarEstadoServidor, 15000);
+
                     try {
-                        const res = await fetch('/datos', { credentials: 'same-origin' });
-                        const json = await res.json();
-                        if (!json.ok) {
-                            console.error('Error del servidor:', json.error);
+                        const respSesion = await fetch('/api/sesion', { credentials: 'same-origin' });
+                        const dataSesion = await respSesion.json();
+                        if (!dataSesion.logueado || dataSesion.usuario.rol !== 'administrador') {
+                            window.location.href = '/?acceso=denegado';
                             return;
                         }
-                        registros.value = json.datos.map(norm);
+
+                        const res = await fetch('/datos', { credentials: 'same-origin' });
+                        const data = await res.json();
+                        if (!data.ok) {
+                            window.location.href = '/?acceso=denegado';
+                            return;
+                        }
+                        registros.value = data.datos.map(norm);
+
+                        const resUsuarios = await fetch('/api/usuarios', { credentials: 'same-origin' });
+                        const dataUsuarios = await resUsuarios.json();
+                        if (dataUsuarios.ok) {
+                            usuarios.value = dataUsuarios.usuarios;
+                        }
+
                         await nextTick();
                         renderGrafico();
                     } catch (e) {
-                        console.error(e);
+                        window.location.href = '/?acceso=denegado';
                     }
                 });
 
+                onUnmounted(() => {
+                    if (intervaloEstado) clearInterval(intervaloEstado);
+                });
+
                 return {
-                    t: tt,
                     registros,
+                    usuarios,
                     busqueda,
                     filtroCategoria,
+                    busquedaUsuarios,
+                    filtroRol,
                     filtrados,
+                    usuariosFiltrados,
                     problemaComun,
-                    canvasGrafico
+                    canvasGrafico,
+                    textoMostrandoRegistros,
+                    textoMostrandoUsuarios,
+                    idioma,
+                    servidorActivo,
+                    iconoServidor,
+                    textoServidor,
+                    claseServidor,
+                    claseTextoServidor
                 };
             }
         }).mount('#app');

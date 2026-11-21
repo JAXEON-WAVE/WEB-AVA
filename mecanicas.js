@@ -25,12 +25,6 @@
       if (nuevoSrc && source.getAttribute('src') !== nuevoSrc) {
         source.setAttribute('src', nuevoSrc);
         video.load();
-        video.addEventListener('loadedmetadata', function onMeta() {
-          video.removeEventListener('loadedmetadata', onMeta);
-          if (video.duration && isFinite(video.duration)) {
-            console.log('Duración del video:', video.duration.toFixed(2), 'segundos');
-          }
-        });
       }
     });
   });
