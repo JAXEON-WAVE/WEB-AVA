@@ -12,22 +12,34 @@
 <body>
 
     <header class="header-principal">
-        <section class="logo-container"><img src="Logo.png" class="dashboard-logo" alt="Logo A.V.A"></section>
-        <nav class="nav-principal">
-            <a href="/" class="btn-nav" data-i18n="inicio">Inicio</a>
-            <a href="/armas" class="btn-nav" data-i18n="armas">Armas</a>
-            <a href="/#Plataformas" class="btn-nav" data-i18n="plataformas">Plataformas</a>
-            <a href="/#multimedia" class="btn-nav" data-i18n="multimedia">Multimedia</a>
-            <a href="/#conoce" class="btn-nav" data-i18n="conoce">Conoce</a>
-            <a href="/noticias" class="btn-nav" data-i18n="noticias">Noticias</a>
-            <a href="/#ayuda" class="btn-nav" data-i18n="ayuda">Ayuda</a>
-            <div class="selector-idioma" role="group" aria-label="Idioma / Language">
-                <button type="button" class="btn-idioma" data-idioma="es" title="Español">ES</button>
-                <button type="button" class="btn-idioma" data-idioma="en" title="English">EN</button>
-            </div>
-        </nav>
-        <h1 class="dashboard-marca" data-i18n="dashboardTitulo">Dashboard A.V.A</h1>
-    </header>
+    <section class="logo-container">
+        <img src="Logo.png" class="dashboard-logo" alt="Logo A.V.A">
+    </section>
+
+    <nav class="nav-principal">
+        <a href="/" class="btn-nav" data-i18n="inicio">Inicio</a>
+        <a href="/armas" class="btn-nav" data-i18n="armas">Armas</a>
+        <a href="/#Plataformas" class="btn-nav" data-i18n="plataformas">Plataformas</a>
+        <a href="/#multimedia" class="btn-nav" data-i18n="multimedia">Multimedia</a>
+        <a href="/#conoce" class="btn-nav" data-i18n="conoce">Conoce</a>
+        <a href="/noticias" class="btn-nav" data-i18n="noticias">Noticias</a>
+        <a href="/#ayuda" class="btn-nav" data-i18n="ayuda">Ayuda</a>
+        <a href="/dashboard" class="btn-nav activo" id="link-dashboard" data-i18n="dashboard">Dashboard</a>
+        
+        <div class="selector-idioma" role="group" aria-label="Idioma / Language">
+            <button type="button" class="btn-idioma" data-idioma="es" title="Español">ES</button>
+            <button type="button" class="btn-idioma" data-idioma="en" title="English">EN</button>
+        </div>
+    </nav>
+
+    <!-- Botón de Iniciar Sesión y Contenedor de Usuario idéntico a los demás menús -->
+    <a href="#" class="btn-login" id="btn-login" data-i18n="login">Iniciar sesión</a>
+    <div id="user-info" class="user-info" style="display:none;">
+        <span id="user-nombre"></span>
+        <span id="user-rol" class="badge-rol"></span>
+        <a href="#" id="btn-logout" class="btn-logout" data-i18n="logout">Cerrar sesión</a>
+    </div>
+</header>
 
     <div id="app">
         <section class="dashboard-hero">
@@ -205,6 +217,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="idiomas.js"></script>
+    <script src="auth.js"></script>
     <script>
         const {
             createApp,
@@ -382,6 +395,24 @@
                     try {
                         const respSesion = await fetch('/api/sesion', { credentials: 'same-origin' });
                         const dataSesion = await respSesion.json();
+                        
+                        // --- AGREGA ESTO PARA ACTUALIZAR EL HEADER EN EL DASHBOARD ---
+                        const btnLogin = document.getElementById('btn-login');
+                        const userInfo = document.getElementById('user-info');
+                        const userNombre = document.getElementById('user-nombre');
+                        const userRol = document.getElementById('user-rol');
+
+                        if (dataSesion.logueado && dataSesion.usuario) {
+                            if (btnLogin) btnLogin.style.display = 'none';
+                            if (userInfo) userInfo.style.display = 'flex';
+                            if (userNombre) userNombre.textContent = dataSesion.usuario.nombre;
+                            if (userRol) {
+                                userRol.textContent = dataSesion.usuario.rol.toUpperCase();
+                                userRol.className = dataSesion.usuario.rol === 'administrador' ? 'badge-rol badge-admin' : 'badge-rol badge-user';
+                            }
+                        }
+                        // -------------------------------------------------------------
+
                         if (!dataSesion.logueado || dataSesion.usuario.rol !== 'administrador') {
                             window.location.href = '/?acceso=denegado';
                             return;
@@ -405,6 +436,17 @@
                         renderGrafico();
                     } catch (e) {
                         window.location.href = '/?acceso=denegado';
+                    }
+                });
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    const btnLogout = document.getElementById('btn-logout');
+                    if (btnLogout) {
+                        btnLogout.addEventListener('click', async (e) => {
+                            e.preventDefault();
+                            await fetch('/api/logout', { method: 'POST', credentials: 'same-origin' });
+                            window.location.href = '/';
+                        });
                     }
                 });
 
